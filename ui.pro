@@ -14,8 +14,9 @@ UI_DIR          = build/ui
 QT              +=  core gui widgets network
 unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/
 
+DESTDIR         = bin
 TEMPLATE        = app
-TARGET          = adblocker
+TARGET          = dbl-gui
 INCLUDEPATH     += . src/mainwindow src \
                         /usr/include/qt5 \
                         /usr/include/qt5/QtGui \
