@@ -24,6 +24,8 @@ private slots:
     void on_networkInterface_currentIndexChanged(int idx);
     void on_applyAllButton_released();
 
+    void on_disableServicePassword_toggled(bool checked);
+
 private:
 	Ui::MainWindow *ui;
 	std::unique_ptr<adblocker::net::IfaceManager> iface_manager_;
