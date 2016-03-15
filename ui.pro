@@ -17,11 +17,13 @@ unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/
 DESTDIR         = bin
 TEMPLATE        = app
 TARGET          = dbl-gui
-INCLUDEPATH     += . src/mainwindow src \
-                        /usr/include/qt5 \
-                        /usr/include/qt5/QtGui \
-                        /usr/include/qt5/QtWidgets \
-                        /usr/include/qt5/QtNetwork
+INCLUDEPATH     += . src/mainwindow src
+
+# \
+#                        /usr/include/qt5 \
+#                        /usr/include/qt5/QtGui \
+#                        /usr/include/qt5/QtWidgets \
+#                        /usr/include/qt5/QtNetwork
 
 # Input
 HEADERS         += src/gen/ui_mainwindow.h src/mainwindow/mainwindow.hxx src/net/iface.hxx
