@@ -82,7 +82,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="controlTab">
        <attribute name="title">
@@ -315,7 +315,7 @@
                    <item>
                     <widget class="QLabel" name="versionLabel">
                      <property name="text">
-                      <string>Version:</string>
+                      <string>UI Version:</string>
                      </property>
                     </widget>
                    </item>

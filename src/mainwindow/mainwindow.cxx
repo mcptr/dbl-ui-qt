@@ -55,18 +55,18 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
-void MainWindow::on_networkInterface_currentIndexChanged(int idx)
-{
-	// auto iface = iface_manager_->get(idx);
-	// if(!iface.addressEntries().length()) {
-	// 	ui->ipv4Address->clear();
-	// }
-	// else {
-	// 	ui->ipv4Address->setText(
-	// 		iface.addressEntries().at(0).ip().toString()
-	// 	);
-	// }
-}
+//void MainWindow::on_networkInterface_currentIndexChanged(int idx)
+//{
+//	// auto iface = iface_manager_->get(idx);
+//	// if(!iface.addressEntries().length()) {
+//	// 	ui->ipv4Address->clear();
+//	// }
+//	// else {
+//	// 	ui->ipv4Address->setText(
+//	// 		iface.addressEntries().at(0).ip().toString()
+//	// 	);
+//	// }
+//}
 
 void MainWindow::on_applyAllButton_released()
 {
