@@ -1,12 +1,14 @@
-#ifndef MAINWINDOW_HXX
-#define MAINWINDOW_HXX
+#ifndef DBLUI_MAINWINDOW_HXX
+#define DBLUI_MAINWINDOW_HXX
 
 #include <QMainWindow>
 #include <memory>
 
+#include <dblclient/session.hxx>
+
 
 namespace Ui {
-	class MainWindow;
+class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -19,12 +21,15 @@ public:
 
 
 private slots:
-    void on_applyAllButton_released();
+	void on_applyAllButton_released();
 
 private:
 	Ui::MainWindow *ui;
+	std::unique_ptr<dblclient::Session> dbl_session_ptr_;
 
+	void closeEvent(QCloseEvent* event);
 	void initialize();
+	void saveSettings();
 };
 
 #endif // MAINWINDOW_H

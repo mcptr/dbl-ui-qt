@@ -130,6 +130,7 @@ public:
     QGridLayout *gridLayout_22;
     QLineEdit *servicePassword;
     QCheckBox *disableServicePassword;
+    QCheckBox *saveServicePassword;
     QWidget *listsTab;
     QGridLayout *gridLayout_9;
     QGridLayout *gridLayout_8;
@@ -645,6 +646,11 @@ public:
 
         formLayout_2->setLayout(2, QFormLayout::FieldRole, gridLayout_22);
 
+        saveServicePassword = new QCheckBox(serviceToolbox);
+        saveServicePassword->setObjectName(QStringLiteral("saveServicePassword"));
+
+        formLayout_2->setWidget(3, QFormLayout::FieldRole, saveServicePassword);
+
 
         gridLayout_23->addLayout(formLayout_2, 0, 0, 1, 1);
 
@@ -860,7 +866,7 @@ public:
         QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
         QObject::connect(disableServicePassword, SIGNAL(toggled(bool)), servicePassword, SLOT(setDisabled(bool)));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         toolBox->setCurrentIndex(2);
 
 
@@ -921,6 +927,7 @@ public:
         servicePort->setPlaceholderText(QApplication::translate("MainWindow", "7654", 0));
         label_17->setText(QApplication::translate("MainWindow", "Password", 0));
         disableServicePassword->setText(QApplication::translate("MainWindow", "No password", 0));
+        saveServicePassword->setText(QApplication::translate("MainWindow", "Save password", 0));
         toolBox->setItemText(toolBox->indexOf(serviceToolbox), QApplication::translate("MainWindow", "Service", 0));
         tabWidget->setTabText(tabWidget->indexOf(settingsTab), QApplication::translate("MainWindow", "Settings", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);

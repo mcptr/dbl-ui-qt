@@ -12,12 +12,18 @@ MOC_DIR         = build/moc
 UI_DIR          = build/ui
 
 QT              +=  core gui widgets network
-unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/ -L$(HOME)/Qt/5.5/gcc_64/lib -L$(VIRTUAL_ENV)/lib
+unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/ \
+                    -L$(HOME)/Qt/5.5/gcc_64/lib \
+                    -L$(VIRTUAL_ENV)/lib
+
+LIBS            += -lboost_system -lcrypto -ldblclient
 
 DESTDIR         = bin
 TEMPLATE        = app
 TARGET          = dbl-gui
-INCLUDEPATH     += . src/mainwindow src $(MOC_DIR) $(HOME)/Qt/5.5/gcc_64/include/ ../service/src/dblclient/
+INCLUDEPATH     += . src src/mainwindow \
+                     $(MOC_DIR) $(HOME)/Qt/5.5/gcc_64/include/ ../service/src \
+                     $(VIRTUAL_ENV)/include
 
 # Input
 HEADERS         += src/gen/ui_mainwindow.h src/mainwindow/mainwindow.hxx
