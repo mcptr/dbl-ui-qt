@@ -12,12 +12,12 @@ MOC_DIR         = build/moc
 UI_DIR          = build/ui
 
 QT              +=  core gui widgets network
-unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/
+unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/ -L$(HOME)/Qt/5.5/gcc_64/lib
 
 DESTDIR         = bin
 TEMPLATE        = app
 TARGET          = dbl-gui
-INCLUDEPATH     += . src/mainwindow src $(MOC_DIR)
+INCLUDEPATH     += . src/mainwindow src $(MOC_DIR) $(HOME)/Qt/5.5/gcc_64/include/
 
 # Input
 HEADERS         += src/gen/ui_mainwindow.h src/mainwindow/mainwindow.hxx

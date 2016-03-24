@@ -389,8 +389,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>560</width>
-             <height>237</height>
+             <width>248</width>
+             <height>99</height>
             </rect>
            </property>
            <attribute name="label">
@@ -479,8 +479,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>560</width>
-             <height>237</height>
+             <width>239</width>
+             <height>117</height>
             </rect>
            </property>
            <attribute name="label">
@@ -1143,6 +1143,22 @@
     <hint type="destinationlabel">
      <x>325</x>
      <y>210</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>disableServicePassword</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>servicePassword</receiver>
+   <slot>setDisabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>533</x>
+     <y>234</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>234</y>
     </hint>
    </hints>
   </connection>

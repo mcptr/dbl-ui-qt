@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.2.1
+** Created by: Qt User Interface Compiler version 5.5.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -483,7 +483,7 @@ public:
         toolBox->setSizePolicy(sizePolicy2);
         preferencesToolbox = new QWidget();
         preferencesToolbox->setObjectName(QStringLiteral("preferencesToolbox"));
-        preferencesToolbox->setGeometry(QRect(0, 0, 560, 237));
+        preferencesToolbox->setGeometry(QRect(0, 0, 248, 99));
         formLayout_7 = new QFormLayout(preferencesToolbox);
         formLayout_7->setSpacing(6);
         formLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -537,7 +537,7 @@ public:
         toolBox->addItem(preferencesToolbox, QStringLiteral("Preferences"));
         httpToolbox = new QWidget();
         httpToolbox->setObjectName(QStringLiteral("httpToolbox"));
-        httpToolbox->setGeometry(QRect(0, 0, 560, 237));
+        httpToolbox->setGeometry(QRect(0, 0, 239, 117));
         gridLayout_2 = new QGridLayout(httpToolbox);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -937,6 +937,7 @@ public:
         QObject::connect(enableHttpResponder, SIGNAL(toggled(bool)), httpResponderStatusCode, SLOT(setEnabled(bool)));
         QObject::connect(enableHttpResponder, SIGNAL(toggled(bool)), httpResponderStatusText, SLOT(setEnabled(bool)));
         QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
+        QObject::connect(disableServicePassword, SIGNAL(toggled(bool)), servicePassword, SLOT(setDisabled(bool)));
 
         tabWidget->setCurrentIndex(1);
         toolBox->setCurrentIndex(2);
