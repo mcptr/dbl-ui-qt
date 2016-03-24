@@ -1,9 +1,9 @@
-#ifndef ADBLOCKER_RUNTIME_HXX
-#define ADBLOCKER_RUNTIME_HXX
+#ifndef DBLUI_RUNTIME_HXX
+#define DBLUI_RUNTIME_HXX
 
 #include <string>
 
-namespace adblocker {
+namespace dblui {
 namespace runtime {
 
 class SystemInfo
@@ -46,6 +46,6 @@ private:
 };
 
 } // runtime
-} // adblocker
+} // dblui
 
 #endif

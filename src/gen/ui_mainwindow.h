@@ -23,13 +23,15 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableWidget>
 #include <QtWidgets/QToolBox>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -39,6 +41,11 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionAbout_program;
+    QAction *actionOpen_project_homepage;
+    QAction *actionLoad_configuration;
+    QAction *actionExport_configuration;
+    QAction *actionExit;
     QWidget *centralWidget;
     QGridLayout *gridLayout_6;
     QHBoxLayout *horizontalLayout;
@@ -90,13 +97,16 @@ public:
     QGridLayout *gridLayout_5;
     QToolBox *toolBox;
     QWidget *preferencesToolbox;
-    QGridLayout *gridLayout_16;
-    QVBoxLayout *verticalLayout_8;
-    QHBoxLayout *horizontalLayout_9;
+    QFormLayout *formLayout_7;
+    QFormLayout *formLayout_6;
     QLabel *label_10;
+    QGridLayout *gridLayout_16;
     QComboBox *comboBox;
     QSpacerItem *horizontalSpacer_8;
-    QSpacerItem *verticalSpacer;
+    QLabel *label_18;
+    QCheckBox *enableStatsUpload;
+    QLabel *label_19;
+    QCheckBox *checkBox_2;
     QWidget *httpToolbox;
     QGridLayout *gridLayout_2;
     QFormLayout *formLayout;
@@ -107,68 +117,68 @@ public:
     QLabel *httpResponderStatusTextLabel;
     QLabel *enableHttpResponderLabel;
     QWidget *serviceToolbox;
-    QGridLayout *gridLayout_3;
+    QGridLayout *gridLayout_23;
     QFormLayout *formLayout_2;
+    QLabel *label_14;
+    QGridLayout *gridLayout_3;
+    QLineEdit *serviceIPAddress;
+    QSpacerItem *horizontalSpacer_9;
     QLabel *label;
-    QLineEdit *lineEdit;
-    QWidget *dnsResolverToolbox;
+    QLineEdit *servicePort;
+    QLabel *label_17;
+    QGridLayout *gridLayout_22;
+    QLineEdit *servicePassword;
+    QCheckBox *disableServicePassword;
+    QWidget *dnsProxyToolbox;
     QGridLayout *gridLayout_21;
     QGridLayout *gridLayout_20;
     QFormLayout *formLayout_3;
     QLabel *label_2;
     QGridLayout *gridLayout_19;
     QSpacerItem *horizontalSpacer_10;
-    QComboBox *comboBox_4;
-    QLabel *label_3;
-    QLineEdit *lineEdit_4;
+    QComboBox *dnsProxySoftware;
     QLabel *label_6;
     QGridLayout *gridLayout_4;
-    QLineEdit *lineEdit_5;
+    QLineEdit *dnsServerPort;
     QSpacerItem *horizontalSpacer_11;
     QLabel *label_11;
     QLabel *label_12;
-    QLineEdit *lineEdit_6;
+    QLineEdit *dnsPidfile;
     QLabel *label_13;
     QHBoxLayout *horizontalLayout_7;
-    QLineEdit *runAsUser;
-    QLineEdit *runAsGroup;
+    QLineEdit *dnsProxyUser;
+    QLineEdit *dnsProxyGroup;
+    QLabel *label_3;
+    QLineEdit *dnsProxyExecutable;
     QSpacerItem *verticalSpacer_4;
-    QWidget *officialListsTab;
-    QGridLayout *gridLayout;
-    QListWidget *officialListsList;
-    QWidget *manageDomainTab;
+    QWidget *listsTab;
     QGridLayout *gridLayout_9;
-    QVBoxLayout *verticalLayout_2;
-    QGroupBox *groupBox_2;
-    QGridLayout *gridLayout_7;
-    QVBoxLayout *verticalLayout;
-    QListView *listView;
-    QHBoxLayout *horizontalLayout_2;
-    QSpacerItem *horizontalSpacer;
-    QPushButton *pushButton_9;
-    QPushButton *pushButton;
-    QGroupBox *groupBox;
-    QVBoxLayout *verticalLayout_9;
-    QComboBox *comboBox_2;
-    QLineEdit *lineEdit_3;
-    QWidget *importExportTab;
-    QGridLayout *gridLayout_17;
-    QGroupBox *groupBox_3;
     QGridLayout *gridLayout_8;
-    QHBoxLayout *horizontalLayout_6;
-    QPushButton *pushButton_3;
-    QPushButton *pushButton_4;
-    QSpacerItem *horizontalSpacer_9;
-    QGroupBox *groupBox_4;
+    QTableWidget *tableWidget;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_7;
+    QFormLayout *formLayout_5;
+    QFormLayout *formLayout_4;
+    QLabel *label_15;
+    QLineEdit *lineEdit_3;
+    QLabel *label_16;
+    QLineEdit *lineEdit_8;
+    QGridLayout *gridLayout;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *pushButton;
+    QWidget *domainsTab;
     QGridLayout *gridLayout_18;
-    QVBoxLayout *verticalLayout_10;
-    QComboBox *comboBox_3;
-    QHBoxLayout *horizontalLayout_3;
-    QPushButton *pushButton_8;
-    QPushButton *pushButton_5;
+    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
+    QComboBox *comboBox_2;
+    QListWidget *listWidget;
+    QGridLayout *gridLayout_17;
     QSpacerItem *horizontalSpacer_6;
-    QSpacerItem *verticalSpacer_3;
+    QPushButton *pushButton_2;
     QStatusBar *statusBar;
+    QMenuBar *menuBar;
+    QMenu *menuAbout;
+    QMenu *menuFile;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -182,6 +192,16 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setMinimumSize(QSize(600, 500));
+        actionAbout_program = new QAction(MainWindow);
+        actionAbout_program->setObjectName(QStringLiteral("actionAbout_program"));
+        actionOpen_project_homepage = new QAction(MainWindow);
+        actionOpen_project_homepage->setObjectName(QStringLiteral("actionOpen_project_homepage"));
+        actionLoad_configuration = new QAction(MainWindow);
+        actionLoad_configuration->setObjectName(QStringLiteral("actionLoad_configuration"));
+        actionExport_configuration = new QAction(MainWindow);
+        actionExport_configuration->setObjectName(QStringLiteral("actionExport_configuration"));
+        actionExit = new QAction(MainWindow);
+        actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout_6 = new QGridLayout(centralWidget);
@@ -215,7 +235,7 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(tabWidget->sizePolicy().hasHeightForWidth());
         tabWidget->setSizePolicy(sizePolicy1);
-        tabWidget->setMinimumSize(QSize(550, 430));
+        tabWidget->setMinimumSize(QSize(550, 400));
         QFont font;
         font.setBold(false);
         font.setWeight(50);
@@ -463,45 +483,61 @@ public:
         toolBox->setSizePolicy(sizePolicy2);
         preferencesToolbox = new QWidget();
         preferencesToolbox->setObjectName(QStringLiteral("preferencesToolbox"));
-        preferencesToolbox->setGeometry(QRect(0, 0, 560, 267));
-        gridLayout_16 = new QGridLayout(preferencesToolbox);
-        gridLayout_16->setSpacing(6);
-        gridLayout_16->setContentsMargins(11, 11, 11, 11);
-        gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
-        verticalLayout_8 = new QVBoxLayout();
-        verticalLayout_8->setSpacing(6);
-        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setSpacing(6);
-        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
+        preferencesToolbox->setGeometry(QRect(0, 0, 560, 237));
+        formLayout_7 = new QFormLayout(preferencesToolbox);
+        formLayout_7->setSpacing(6);
+        formLayout_7->setContentsMargins(11, 11, 11, 11);
+        formLayout_7->setObjectName(QStringLiteral("formLayout_7"));
+        formLayout_6 = new QFormLayout();
+        formLayout_6->setSpacing(6);
+        formLayout_6->setObjectName(QStringLiteral("formLayout_6"));
         label_10 = new QLabel(preferencesToolbox);
         label_10->setObjectName(QStringLiteral("label_10"));
 
-        horizontalLayout_9->addWidget(label_10);
+        formLayout_6->setWidget(0, QFormLayout::LabelRole, label_10);
 
+        gridLayout_16 = new QGridLayout();
+        gridLayout_16->setSpacing(6);
+        gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
         comboBox = new QComboBox(preferencesToolbox);
         comboBox->setObjectName(QStringLiteral("comboBox"));
 
-        horizontalLayout_9->addWidget(comboBox);
+        gridLayout_16->addWidget(comboBox, 0, 0, 1, 1);
 
         horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_9->addItem(horizontalSpacer_8);
+        gridLayout_16->addItem(horizontalSpacer_8, 0, 1, 1, 1);
 
 
-        verticalLayout_8->addLayout(horizontalLayout_9);
+        formLayout_6->setLayout(0, QFormLayout::FieldRole, gridLayout_16);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        label_18 = new QLabel(preferencesToolbox);
+        label_18->setObjectName(QStringLiteral("label_18"));
 
-        verticalLayout_8->addItem(verticalSpacer);
+        formLayout_6->setWidget(1, QFormLayout::LabelRole, label_18);
+
+        enableStatsUpload = new QCheckBox(preferencesToolbox);
+        enableStatsUpload->setObjectName(QStringLiteral("enableStatsUpload"));
+
+        formLayout_6->setWidget(1, QFormLayout::FieldRole, enableStatsUpload);
+
+        label_19 = new QLabel(preferencesToolbox);
+        label_19->setObjectName(QStringLiteral("label_19"));
+
+        formLayout_6->setWidget(2, QFormLayout::LabelRole, label_19);
+
+        checkBox_2 = new QCheckBox(preferencesToolbox);
+        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+
+        formLayout_6->setWidget(2, QFormLayout::FieldRole, checkBox_2);
 
 
-        gridLayout_16->addLayout(verticalLayout_8, 0, 0, 1, 1);
+        formLayout_7->setLayout(0, QFormLayout::LabelRole, formLayout_6);
 
         toolBox->addItem(preferencesToolbox, QStringLiteral("Preferences"));
         httpToolbox = new QWidget();
         httpToolbox->setObjectName(QStringLiteral("httpToolbox"));
-        httpToolbox->setGeometry(QRect(0, 0, 560, 296));
+        httpToolbox->setGeometry(QRect(0, 0, 560, 237));
         gridLayout_2 = new QGridLayout(httpToolbox);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -534,7 +570,7 @@ public:
         httpResponderStatusCode->setMaximumSize(QSize(50, 16777215));
         httpResponderStatusCode->setMaxLength(3);
         httpResponderStatusCode->setFrame(true);
-        httpResponderStatusCode->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        httpResponderStatusCode->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
         httpResponderStatusCode->setClearButtonEnabled(false);
 
         formLayout->setWidget(3, QFormLayout::FieldRole, httpResponderStatusCode);
@@ -556,32 +592,77 @@ public:
         toolBox->addItem(httpToolbox, QStringLiteral("HTTP Responder"));
         serviceToolbox = new QWidget();
         serviceToolbox->setObjectName(QStringLiteral("serviceToolbox"));
-        gridLayout_3 = new QGridLayout(serviceToolbox);
-        gridLayout_3->setSpacing(6);
-        gridLayout_3->setContentsMargins(11, 11, 11, 11);
-        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        serviceToolbox->setGeometry(QRect(0, 0, 560, 237));
+        gridLayout_23 = new QGridLayout(serviceToolbox);
+        gridLayout_23->setSpacing(6);
+        gridLayout_23->setContentsMargins(11, 11, 11, 11);
+        gridLayout_23->setObjectName(QStringLiteral("gridLayout_23"));
         formLayout_2 = new QFormLayout();
         formLayout_2->setSpacing(6);
         formLayout_2->setObjectName(QStringLiteral("formLayout_2"));
+        label_14 = new QLabel(serviceToolbox);
+        label_14->setObjectName(QStringLiteral("label_14"));
+
+        formLayout_2->setWidget(0, QFormLayout::LabelRole, label_14);
+
+        gridLayout_3 = new QGridLayout();
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        serviceIPAddress = new QLineEdit(serviceToolbox);
+        serviceIPAddress->setObjectName(QStringLiteral("serviceIPAddress"));
+        serviceIPAddress->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+
+        gridLayout_3->addWidget(serviceIPAddress, 0, 0, 1, 1);
+
+        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_3->addItem(horizontalSpacer_9, 0, 1, 1, 1);
+
+
+        formLayout_2->setLayout(0, QFormLayout::FieldRole, gridLayout_3);
+
         label = new QLabel(serviceToolbox);
         label->setObjectName(QStringLiteral("label"));
 
-        formLayout_2->setWidget(0, QFormLayout::LabelRole, label);
+        formLayout_2->setWidget(1, QFormLayout::LabelRole, label);
 
-        lineEdit = new QLineEdit(serviceToolbox);
-        lineEdit->setObjectName(QStringLiteral("lineEdit"));
-        lineEdit->setMaximumSize(QSize(50, 16777215));
-        lineEdit->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        servicePort = new QLineEdit(serviceToolbox);
+        servicePort->setObjectName(QStringLiteral("servicePort"));
+        servicePort->setMaximumSize(QSize(50, 16777215));
+        servicePort->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
-        formLayout_2->setWidget(0, QFormLayout::FieldRole, lineEdit);
+        formLayout_2->setWidget(1, QFormLayout::FieldRole, servicePort);
+
+        label_17 = new QLabel(serviceToolbox);
+        label_17->setObjectName(QStringLiteral("label_17"));
+
+        formLayout_2->setWidget(2, QFormLayout::LabelRole, label_17);
+
+        gridLayout_22 = new QGridLayout();
+        gridLayout_22->setSpacing(6);
+        gridLayout_22->setObjectName(QStringLiteral("gridLayout_22"));
+        servicePassword = new QLineEdit(serviceToolbox);
+        servicePassword->setObjectName(QStringLiteral("servicePassword"));
+        servicePassword->setEchoMode(QLineEdit::PasswordEchoOnEdit);
+
+        gridLayout_22->addWidget(servicePassword, 0, 0, 1, 1);
+
+        disableServicePassword = new QCheckBox(serviceToolbox);
+        disableServicePassword->setObjectName(QStringLiteral("disableServicePassword"));
+
+        gridLayout_22->addWidget(disableServicePassword, 0, 1, 1, 1);
 
 
-        gridLayout_3->addLayout(formLayout_2, 0, 0, 1, 1);
+        formLayout_2->setLayout(2, QFormLayout::FieldRole, gridLayout_22);
+
+
+        gridLayout_23->addLayout(formLayout_2, 0, 0, 1, 1);
 
         toolBox->addItem(serviceToolbox, QStringLiteral("Service"));
-        dnsResolverToolbox = new QWidget();
-        dnsResolverToolbox->setObjectName(QStringLiteral("dnsResolverToolbox"));
-        gridLayout_21 = new QGridLayout(dnsResolverToolbox);
+        dnsProxyToolbox = new QWidget();
+        dnsProxyToolbox->setObjectName(QStringLiteral("dnsProxyToolbox"));
+        dnsProxyToolbox->setGeometry(QRect(0, 0, 365, 173));
+        gridLayout_21 = new QGridLayout(dnsProxyToolbox);
         gridLayout_21->setSpacing(6);
         gridLayout_21->setContentsMargins(11, 11, 11, 11);
         gridLayout_21->setObjectName(QStringLiteral("gridLayout_21"));
@@ -591,7 +672,7 @@ public:
         formLayout_3 = new QFormLayout();
         formLayout_3->setSpacing(6);
         formLayout_3->setObjectName(QStringLiteral("formLayout_3"));
-        label_2 = new QLabel(dnsResolverToolbox);
+        label_2 = new QLabel(dnsProxyToolbox);
         label_2->setObjectName(QStringLiteral("label_2"));
 
         formLayout_3->setWidget(0, QFormLayout::LabelRole, label_2);
@@ -603,25 +684,15 @@ public:
 
         gridLayout_19->addItem(horizontalSpacer_10, 0, 1, 1, 1);
 
-        comboBox_4 = new QComboBox(dnsResolverToolbox);
-        comboBox_4->setObjectName(QStringLiteral("comboBox_4"));
+        dnsProxySoftware = new QComboBox(dnsProxyToolbox);
+        dnsProxySoftware->setObjectName(QStringLiteral("dnsProxySoftware"));
 
-        gridLayout_19->addWidget(comboBox_4, 0, 0, 1, 1);
+        gridLayout_19->addWidget(dnsProxySoftware, 0, 0, 1, 1);
 
 
         formLayout_3->setLayout(0, QFormLayout::FieldRole, gridLayout_19);
 
-        label_3 = new QLabel(dnsResolverToolbox);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        formLayout_3->setWidget(1, QFormLayout::LabelRole, label_3);
-
-        lineEdit_4 = new QLineEdit(dnsResolverToolbox);
-        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
-
-        formLayout_3->setWidget(1, QFormLayout::FieldRole, lineEdit_4);
-
-        label_6 = new QLabel(dnsResolverToolbox);
+        label_6 = new QLabel(dnsProxyToolbox);
         label_6->setObjectName(QStringLiteral("label_6"));
 
         formLayout_3->setWidget(2, QFormLayout::LabelRole, label_6);
@@ -629,18 +700,18 @@ public:
         gridLayout_4 = new QGridLayout();
         gridLayout_4->setSpacing(6);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        lineEdit_5 = new QLineEdit(dnsResolverToolbox);
-        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
-        lineEdit_5->setMaximumSize(QSize(60, 16777215));
-        lineEdit_5->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+        dnsServerPort = new QLineEdit(dnsProxyToolbox);
+        dnsServerPort->setObjectName(QStringLiteral("dnsServerPort"));
+        dnsServerPort->setMaximumSize(QSize(60, 16777215));
+        dnsServerPort->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
-        gridLayout_4->addWidget(lineEdit_5, 0, 0, 1, 1);
+        gridLayout_4->addWidget(dnsServerPort, 0, 0, 1, 1);
 
         horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         gridLayout_4->addItem(horizontalSpacer_11, 0, 2, 1, 1);
 
-        label_11 = new QLabel(dnsResolverToolbox);
+        label_11 = new QLabel(dnsProxyToolbox);
         label_11->setObjectName(QStringLiteral("label_11"));
 
         gridLayout_4->addWidget(label_11, 0, 1, 1, 1);
@@ -648,17 +719,17 @@ public:
 
         formLayout_3->setLayout(2, QFormLayout::FieldRole, gridLayout_4);
 
-        label_12 = new QLabel(dnsResolverToolbox);
+        label_12 = new QLabel(dnsProxyToolbox);
         label_12->setObjectName(QStringLiteral("label_12"));
 
         formLayout_3->setWidget(3, QFormLayout::LabelRole, label_12);
 
-        lineEdit_6 = new QLineEdit(dnsResolverToolbox);
-        lineEdit_6->setObjectName(QStringLiteral("lineEdit_6"));
+        dnsPidfile = new QLineEdit(dnsProxyToolbox);
+        dnsPidfile->setObjectName(QStringLiteral("dnsPidfile"));
 
-        formLayout_3->setWidget(3, QFormLayout::FieldRole, lineEdit_6);
+        formLayout_3->setWidget(3, QFormLayout::FieldRole, dnsPidfile);
 
-        label_13 = new QLabel(dnsResolverToolbox);
+        label_13 = new QLabel(dnsProxyToolbox);
         label_13->setObjectName(QStringLiteral("label_13"));
 
         formLayout_3->setWidget(4, QFormLayout::LabelRole, label_13);
@@ -666,18 +737,28 @@ public:
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        runAsUser = new QLineEdit(dnsResolverToolbox);
-        runAsUser->setObjectName(QStringLiteral("runAsUser"));
+        dnsProxyUser = new QLineEdit(dnsProxyToolbox);
+        dnsProxyUser->setObjectName(QStringLiteral("dnsProxyUser"));
 
-        horizontalLayout_7->addWidget(runAsUser);
+        horizontalLayout_7->addWidget(dnsProxyUser);
 
-        runAsGroup = new QLineEdit(dnsResolverToolbox);
-        runAsGroup->setObjectName(QStringLiteral("runAsGroup"));
+        dnsProxyGroup = new QLineEdit(dnsProxyToolbox);
+        dnsProxyGroup->setObjectName(QStringLiteral("dnsProxyGroup"));
 
-        horizontalLayout_7->addWidget(runAsGroup);
+        horizontalLayout_7->addWidget(dnsProxyGroup);
 
 
         formLayout_3->setLayout(4, QFormLayout::FieldRole, horizontalLayout_7);
+
+        label_3 = new QLabel(dnsProxyToolbox);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        formLayout_3->setWidget(1, QFormLayout::LabelRole, label_3);
+
+        dnsProxyExecutable = new QLineEdit(dnsProxyToolbox);
+        dnsProxyExecutable->setObjectName(QStringLiteral("dnsProxyExecutable"));
+
+        formLayout_3->setWidget(1, QFormLayout::FieldRole, dnsProxyExecutable);
 
 
         gridLayout_20->addLayout(formLayout_3, 0, 0, 2, 2);
@@ -689,189 +770,140 @@ public:
 
         gridLayout_21->addItem(verticalSpacer_4, 4, 0, 1, 1);
 
-        toolBox->addItem(dnsResolverToolbox, QStringLiteral("DNS resolver (advanced)"));
+        toolBox->addItem(dnsProxyToolbox, QStringLiteral("DNS proxy (advanced)"));
 
         gridLayout_5->addWidget(toolBox, 0, 0, 1, 1);
 
         tabWidget->addTab(settingsTab, QString());
-        officialListsTab = new QWidget();
-        officialListsTab->setObjectName(QStringLiteral("officialListsTab"));
-        gridLayout = new QGridLayout(officialListsTab);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        officialListsList = new QListWidget(officialListsTab);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        new QListWidgetItem(officialListsList);
-        officialListsList->setObjectName(QStringLiteral("officialListsList"));
-        officialListsList->setSelectionMode(QAbstractItemView::ExtendedSelection);
-
-        gridLayout->addWidget(officialListsList, 0, 0, 1, 1);
-
-        tabWidget->addTab(officialListsTab, QString());
-        manageDomainTab = new QWidget();
-        manageDomainTab->setObjectName(QStringLiteral("manageDomainTab"));
-        gridLayout_9 = new QGridLayout(manageDomainTab);
+        listsTab = new QWidget();
+        listsTab->setObjectName(QStringLiteral("listsTab"));
+        gridLayout_9 = new QGridLayout(listsTab);
         gridLayout_9->setSpacing(6);
         gridLayout_9->setContentsMargins(11, 11, 11, 11);
         gridLayout_9->setObjectName(QStringLiteral("gridLayout_9"));
-        verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setSpacing(6);
-        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
-        groupBox_2 = new QGroupBox(manageDomainTab);
-        groupBox_2->setObjectName(QStringLiteral("groupBox_2"));
-        gridLayout_7 = new QGridLayout(groupBox_2);
+        gridLayout_8 = new QGridLayout();
+        gridLayout_8->setSpacing(6);
+        gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
+        tableWidget = new QTableWidget(listsTab);
+        if (tableWidget->columnCount() < 4)
+            tableWidget->setColumnCount(4);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
+        tableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        tableWidget->setObjectName(QStringLiteral("tableWidget"));
+        tableWidget->horizontalHeader()->setStretchLastSection(true);
+
+        gridLayout_8->addWidget(tableWidget, 0, 0, 1, 1);
+
+        groupBox = new QGroupBox(listsTab);
+        groupBox->setObjectName(QStringLiteral("groupBox"));
+        gridLayout_7 = new QGridLayout(groupBox);
         gridLayout_7->setSpacing(6);
         gridLayout_7->setContentsMargins(11, 11, 11, 11);
         gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        listView = new QListView(groupBox_2);
-        listView->setObjectName(QStringLiteral("listView"));
-        listView->setAcceptDrops(true);
-        listView->setAutoFillBackground(false);
+        formLayout_5 = new QFormLayout();
+        formLayout_5->setSpacing(6);
+        formLayout_5->setObjectName(QStringLiteral("formLayout_5"));
+        formLayout_4 = new QFormLayout();
+        formLayout_4->setSpacing(6);
+        formLayout_4->setObjectName(QStringLiteral("formLayout_4"));
+        label_15 = new QLabel(groupBox);
+        label_15->setObjectName(QStringLiteral("label_15"));
 
-        verticalLayout->addWidget(listView);
-
-        horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setSpacing(6);
-        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer);
-
-        pushButton_9 = new QPushButton(groupBox_2);
-        pushButton_9->setObjectName(QStringLiteral("pushButton_9"));
-        pushButton_9->setEnabled(false);
-
-        horizontalLayout_2->addWidget(pushButton_9);
-
-        pushButton = new QPushButton(groupBox_2);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setEnabled(false);
-
-        horizontalLayout_2->addWidget(pushButton);
-
-
-        verticalLayout->addLayout(horizontalLayout_2);
-
-
-        gridLayout_7->addLayout(verticalLayout, 2, 0, 1, 1);
-
-        groupBox = new QGroupBox(groupBox_2);
-        groupBox->setObjectName(QStringLiteral("groupBox"));
-        verticalLayout_9 = new QVBoxLayout(groupBox);
-        verticalLayout_9->setSpacing(6);
-        verticalLayout_9->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
-        comboBox_2 = new QComboBox(groupBox);
-        comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
-
-        verticalLayout_9->addWidget(comboBox_2);
+        formLayout_4->setWidget(0, QFormLayout::LabelRole, label_15);
 
         lineEdit_3 = new QLineEdit(groupBox);
         lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
 
-        verticalLayout_9->addWidget(lineEdit_3);
+        formLayout_4->setWidget(0, QFormLayout::FieldRole, lineEdit_3);
+
+        label_16 = new QLabel(groupBox);
+        label_16->setObjectName(QStringLiteral("label_16"));
+
+        formLayout_4->setWidget(1, QFormLayout::LabelRole, label_16);
+
+        lineEdit_8 = new QLineEdit(groupBox);
+        lineEdit_8->setObjectName(QStringLiteral("lineEdit_8"));
+
+        formLayout_4->setWidget(1, QFormLayout::FieldRole, lineEdit_8);
 
 
-        gridLayout_7->addWidget(groupBox, 0, 0, 1, 1);
+        formLayout_5->setLayout(0, QFormLayout::SpanningRole, formLayout_4);
+
+        gridLayout = new QGridLayout();
+        gridLayout->setSpacing(6);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout->addItem(horizontalSpacer, 0, 0, 1, 1);
+
+        pushButton = new QPushButton(groupBox);
+        pushButton->setObjectName(QStringLiteral("pushButton"));
+
+        gridLayout->addWidget(pushButton, 0, 1, 1, 1);
 
 
-        verticalLayout_2->addWidget(groupBox_2);
+        formLayout_5->setLayout(1, QFormLayout::FieldRole, gridLayout);
 
 
-        gridLayout_9->addLayout(verticalLayout_2, 0, 0, 1, 1);
-
-        tabWidget->addTab(manageDomainTab, QString());
-        importExportTab = new QWidget();
-        importExportTab->setObjectName(QStringLiteral("importExportTab"));
-        gridLayout_17 = new QGridLayout(importExportTab);
-        gridLayout_17->setSpacing(6);
-        gridLayout_17->setContentsMargins(11, 11, 11, 11);
-        gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
-        groupBox_3 = new QGroupBox(importExportTab);
-        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
-        gridLayout_8 = new QGridLayout(groupBox_3);
-        gridLayout_8->setSpacing(6);
-        gridLayout_8->setContentsMargins(11, 11, 11, 11);
-        gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setSpacing(6);
-        horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
-        pushButton_3 = new QPushButton(groupBox_3);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-
-        horizontalLayout_6->addWidget(pushButton_3);
-
-        pushButton_4 = new QPushButton(groupBox_3);
-        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
-
-        horizontalLayout_6->addWidget(pushButton_4);
-
-        horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_6->addItem(horizontalSpacer_9);
+        gridLayout_7->addLayout(formLayout_5, 0, 0, 1, 1);
 
 
-        gridLayout_8->addLayout(horizontalLayout_6, 0, 0, 1, 1);
+        gridLayout_8->addWidget(groupBox, 1, 0, 1, 1);
 
 
-        gridLayout_17->addWidget(groupBox_3, 0, 0, 1, 2);
+        gridLayout_9->addLayout(gridLayout_8, 0, 0, 1, 1);
 
-        groupBox_4 = new QGroupBox(importExportTab);
-        groupBox_4->setObjectName(QStringLiteral("groupBox_4"));
-        gridLayout_18 = new QGridLayout(groupBox_4);
+        tabWidget->addTab(listsTab, QString());
+        domainsTab = new QWidget();
+        domainsTab->setObjectName(QStringLiteral("domainsTab"));
+        gridLayout_18 = new QGridLayout(domainsTab);
         gridLayout_18->setSpacing(6);
         gridLayout_18->setContentsMargins(11, 11, 11, 11);
         gridLayout_18->setObjectName(QStringLiteral("gridLayout_18"));
-        verticalLayout_10 = new QVBoxLayout();
-        verticalLayout_10->setSpacing(6);
-        verticalLayout_10->setObjectName(QStringLiteral("verticalLayout_10"));
-        comboBox_3 = new QComboBox(groupBox_4);
-        comboBox_3->setObjectName(QStringLiteral("comboBox_3"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        comboBox_2 = new QComboBox(domainsTab);
+        comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
 
-        verticalLayout_10->addWidget(comboBox_3);
+        verticalLayout->addWidget(comboBox_2);
 
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        pushButton_8 = new QPushButton(groupBox_4);
-        pushButton_8->setObjectName(QStringLiteral("pushButton_8"));
+        listWidget = new QListWidget(domainsTab);
+        listWidget->setObjectName(QStringLiteral("listWidget"));
 
-        horizontalLayout_3->addWidget(pushButton_8);
+        verticalLayout->addWidget(listWidget);
 
-        pushButton_5 = new QPushButton(groupBox_4);
-        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
 
-        horizontalLayout_3->addWidget(pushButton_5);
+        verticalLayout_2->addLayout(verticalLayout);
 
+        gridLayout_17 = new QGridLayout();
+        gridLayout_17->setSpacing(6);
+        gridLayout_17->setObjectName(QStringLiteral("gridLayout_17"));
         horizontalSpacer_6 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
-        horizontalLayout_3->addItem(horizontalSpacer_6);
+        gridLayout_17->addItem(horizontalSpacer_6, 0, 0, 1, 1);
+
+        pushButton_2 = new QPushButton(domainsTab);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+
+        gridLayout_17->addWidget(pushButton_2, 0, 1, 1, 1);
 
 
-        verticalLayout_10->addLayout(horizontalLayout_3);
+        verticalLayout_2->addLayout(gridLayout_17);
 
 
-        gridLayout_18->addLayout(verticalLayout_10, 0, 0, 1, 1);
+        gridLayout_18->addLayout(verticalLayout_2, 0, 0, 1, 1);
 
-
-        gridLayout_17->addWidget(groupBox_4, 1, 0, 1, 2);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_17->addItem(verticalSpacer_3, 2, 0, 1, 1);
-
-        tabWidget->addTab(importExportTab, QString());
+        tabWidget->addTab(domainsTab, QString());
 
         gridLayout_6->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -883,13 +915,30 @@ public:
         statusBar->setMinimumSize(QSize(0, 0));
         statusBar->setSizeGripEnabled(false);
         MainWindow->setStatusBar(statusBar);
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 600, 20));
+        menuAbout = new QMenu(menuBar);
+        menuAbout->setObjectName(QStringLiteral("menuAbout"));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QStringLiteral("menuFile"));
+        MainWindow->setMenuBar(menuBar);
+
+        menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuAbout->menuAction());
+        menuAbout->addAction(actionAbout_program);
+        menuAbout->addAction(actionOpen_project_homepage);
+        menuFile->addAction(actionLoad_configuration);
+        menuFile->addAction(actionExport_configuration);
+        menuFile->addSeparator();
+        menuFile->addAction(actionExit);
 
         retranslateUi(MainWindow);
-        QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
         QObject::connect(enableHttpResponder, SIGNAL(toggled(bool)), httpResponderStatusCode, SLOT(setEnabled(bool)));
         QObject::connect(enableHttpResponder, SIGNAL(toggled(bool)), httpResponderStatusText, SLOT(setEnabled(bool)));
+        QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
         toolBox->setCurrentIndex(2);
 
 
@@ -899,6 +948,11 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "AdBlocker", "main"));
+        actionAbout_program->setText(QApplication::translate("MainWindow", "About", 0));
+        actionOpen_project_homepage->setText(QApplication::translate("MainWindow", "Open project homepage", 0));
+        actionLoad_configuration->setText(QApplication::translate("MainWindow", "Load configuration", 0));
+        actionExport_configuration->setText(QApplication::translate("MainWindow", "Export configuration", 0));
+        actionExit->setText(QApplication::translate("MainWindow", "Close", 0));
         applyAllButton->setText(QApplication::translate("MainWindow", "Apply", 0));
         exitButton->setText(QApplication::translate("MainWindow", "Exit", 0));
         label_4->setText(QApplication::translate("MainWindow", "Resolves to:", 0));
@@ -915,7 +969,7 @@ public:
         label_5->setText(QApplication::translate("MainWindow", "Ad blocking service:", 0));
         osName->setText(QApplication::translate("MainWindow", "OS", 0));
         softwareName->setText(QApplication::translate("MainWindow", "DNSBlocker", 0));
-        versionLabel->setText(QApplication::translate("MainWindow", "Version:", 0));
+        versionLabel->setText(QApplication::translate("MainWindow", "UI Version:", 0));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "Control", 0));
         label_10->setText(QApplication::translate("MainWindow", "Update blocking rules:", 0));
         comboBox->clear();
@@ -924,6 +978,10 @@ public:
          << QApplication::translate("MainWindow", "Daily", 0)
          << QApplication::translate("MainWindow", "Weekly", 0)
         );
+        label_18->setText(QApplication::translate("MainWindow", "Domain stats upload", 0));
+        enableStatsUpload->setText(QApplication::translate("MainWindow", "Enable", 0));
+        label_19->setText(QApplication::translate("MainWindow", "Stats unique id", 0));
+        checkBox_2->setText(QApplication::translate("MainWindow", "Enable", 0));
         toolBox->setItemText(toolBox->indexOf(preferencesToolbox), QApplication::translate("MainWindow", "Preferences", 0));
         enableHttpResponder->setText(QString());
         httpResponderStatusText->setText(QApplication::translate("MainWindow", "Not found", 0));
@@ -933,71 +991,56 @@ public:
         httpResponderStatusTextLabel->setText(QApplication::translate("MainWindow", "HTTP response status text", 0));
         enableHttpResponderLabel->setText(QApplication::translate("MainWindow", "Enable http responder", 0));
         toolBox->setItemText(toolBox->indexOf(httpToolbox), QApplication::translate("MainWindow", "HTTP Responder", 0));
+        label_14->setText(QApplication::translate("MainWindow", "Address", 0));
+        serviceIPAddress->setPlaceholderText(QApplication::translate("MainWindow", "127.0.0.1", 0));
         label->setText(QApplication::translate("MainWindow", "Service port", 0));
-        lineEdit->setInputMask(QApplication::translate("MainWindow", "99999", 0));
-        lineEdit->setText(QString());
-        lineEdit->setPlaceholderText(QApplication::translate("MainWindow", "7654", 0));
+        servicePort->setInputMask(QApplication::translate("MainWindow", "99999", 0));
+        servicePort->setText(QString());
+        servicePort->setPlaceholderText(QApplication::translate("MainWindow", "7654", 0));
+        label_17->setText(QApplication::translate("MainWindow", "Password", 0));
+        disableServicePassword->setText(QApplication::translate("MainWindow", "Disable", 0));
         toolBox->setItemText(toolBox->indexOf(serviceToolbox), QApplication::translate("MainWindow", "Service", 0));
         label_2->setText(QApplication::translate("MainWindow", "DNS proxy software", 0));
-        comboBox_4->clear();
-        comboBox_4->insertItems(0, QStringList()
+        dnsProxySoftware->clear();
+        dnsProxySoftware->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "unbound", 0)
          << QApplication::translate("MainWindow", "dnsmasq", 0)
         );
-        label_3->setText(QApplication::translate("MainWindow", "Executable", 0));
-        lineEdit_4->setPlaceholderText(QApplication::translate("MainWindow", "Find automatically", 0));
         label_6->setText(QApplication::translate("MainWindow", "DNS server port", 0));
-        lineEdit_5->setInputMask(QApplication::translate("MainWindow", "99999", 0));
-        lineEdit_5->setPlaceholderText(QApplication::translate("MainWindow", "53", 0));
+        dnsServerPort->setInputMask(QApplication::translate("MainWindow", "99999", 0));
+        dnsServerPort->setPlaceholderText(QApplication::translate("MainWindow", "53", 0));
         label_11->setText(QApplication::translate("MainWindow", "Requires redirecting traffic", 0));
         label_12->setText(QApplication::translate("MainWindow", "Pidfile", 0));
-        lineEdit_6->setPlaceholderText(QApplication::translate("MainWindow", "Use default", 0));
+        dnsPidfile->setPlaceholderText(QApplication::translate("MainWindow", "Use default", 0));
         label_13->setText(QApplication::translate("MainWindow", "Run as", 0));
-        runAsUser->setPlaceholderText(QApplication::translate("MainWindow", "User", 0));
-        runAsGroup->setPlaceholderText(QApplication::translate("MainWindow", "Group", 0));
-        toolBox->setItemText(toolBox->indexOf(dnsResolverToolbox), QApplication::translate("MainWindow", "DNS resolver (advanced)", 0));
+        dnsProxyUser->setPlaceholderText(QApplication::translate("MainWindow", "User", 0));
+        dnsProxyGroup->setPlaceholderText(QApplication::translate("MainWindow", "Group", 0));
+        label_3->setText(QApplication::translate("MainWindow", "DNS server executable", 0));
+        dnsProxyExecutable->setPlaceholderText(QApplication::translate("MainWindow", "Find automatically", 0));
+        toolBox->setItemText(toolBox->indexOf(dnsProxyToolbox), QApplication::translate("MainWindow", "DNS proxy (advanced)", 0));
         tabWidget->setTabText(tabWidget->indexOf(settingsTab), QApplication::translate("MainWindow", "Settings", 0));
-
-        const bool __sortingEnabled = officialListsList->isSortingEnabled();
-        officialListsList->setSortingEnabled(false);
-        QListWidgetItem *___qlistwidgetitem = officialListsList->item(0);
-        ___qlistwidgetitem->setText(QApplication::translate("MainWindow", "Minimal ad blocking list", 0));
-        QListWidgetItem *___qlistwidgetitem1 = officialListsList->item(1);
-        ___qlistwidgetitem1->setText(QApplication::translate("MainWindow", "Standard ad blocking list", 0));
-        QListWidgetItem *___qlistwidgetitem2 = officialListsList->item(2);
-        ___qlistwidgetitem2->setText(QApplication::translate("MainWindow", "Extended ad blocking list", 0));
-        QListWidgetItem *___qlistwidgetitem3 = officialListsList->item(3);
-        ___qlistwidgetitem3->setText(QApplication::translate("MainWindow", "Polish", 0));
-        QListWidgetItem *___qlistwidgetitem4 = officialListsList->item(4);
-        ___qlistwidgetitem4->setText(QApplication::translate("MainWindow", "English", 0));
-        QListWidgetItem *___qlistwidgetitem5 = officialListsList->item(5);
-        ___qlistwidgetitem5->setText(QApplication::translate("MainWindow", "German", 0));
-        QListWidgetItem *___qlistwidgetitem6 = officialListsList->item(6);
-        ___qlistwidgetitem6->setText(QApplication::translate("MainWindow", "Google block", 0));
-        QListWidgetItem *___qlistwidgetitem7 = officialListsList->item(7);
-        ___qlistwidgetitem7->setText(QApplication::translate("MainWindow", "Facebook block", 0));
-        QListWidgetItem *___qlistwidgetitem8 = officialListsList->item(8);
-        ___qlistwidgetitem8->setText(QApplication::translate("MainWindow", "Social block", 0));
-        officialListsList->setSortingEnabled(__sortingEnabled);
-
-        tabWidget->setTabText(tabWidget->indexOf(officialListsTab), QApplication::translate("MainWindow", "Official lists", 0));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Currently blocked domains", 0));
-        pushButton_9->setText(QApplication::translate("MainWindow", "Create custom list", 0));
-        pushButton->setText(QApplication::translate("MainWindow", "Remove selected", 0));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Filter", 0));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Name", 0));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "URL", 0));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Active", 0));
+        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
+        ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Description", 0));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Add list", 0));
+        label_15->setText(QApplication::translate("MainWindow", "Name", 0));
+        label_16->setText(QApplication::translate("MainWindow", "URL", 0));
+        pushButton->setText(QApplication::translate("MainWindow", "Add", 0));
+        tabWidget->setTabText(tabWidget->indexOf(listsTab), QApplication::translate("MainWindow", "Lists", 0));
         comboBox_2->clear();
         comboBox_2->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "-- All lists --", 0)
+         << QApplication::translate("MainWindow", "All lists", 0)
+         << QApplication::translate("MainWindow", "Whitelisted", 0)
         );
-        lineEdit_3->setPlaceholderText(QApplication::translate("MainWindow", "Domain name", 0));
-        tabWidget->setTabText(tabWidget->indexOf(manageDomainTab), QApplication::translate("MainWindow", "Edit domains", 0));
-        groupBox_3->setTitle(QApplication::translate("MainWindow", "Full configuration (including lists)", 0));
-        pushButton_3->setText(QApplication::translate("MainWindow", "Import", 0));
-        pushButton_4->setText(QApplication::translate("MainWindow", "Export", 0));
-        groupBox_4->setTitle(QApplication::translate("MainWindow", "Lists only", 0));
-        pushButton_8->setText(QApplication::translate("MainWindow", "Export", 0));
-        pushButton_5->setText(QApplication::translate("MainWindow", "Import from file", 0));
-        tabWidget->setTabText(tabWidget->indexOf(importExportTab), QApplication::translate("MainWindow", "Import/Export", 0));
+        pushButton_2->setText(QApplication::translate("MainWindow", "Remove", 0));
+        tabWidget->setTabText(tabWidget->indexOf(domainsTab), QApplication::translate("MainWindow", "Domains", 0));
+        menuAbout->setTitle(QApplication::translate("MainWindow", "Help", 0));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 
 };

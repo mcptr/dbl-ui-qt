@@ -5,7 +5,7 @@
 #include <memory>
 #include <unistd.h>
 
-namespace adblocker {
+namespace dblui {
 namespace command {
 
 int run(const std::string& cmd)
@@ -29,4 +29,4 @@ int run(const std::string& cmd)
 // }
 
 } // command
-} // adblocker
+} // dblui

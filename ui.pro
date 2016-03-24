@@ -7,7 +7,7 @@ OBJECTS_DIR     = build/objects
 QMAKE_CC        = clang
 QMAKE_CXX       = clang++
 QMAKE_LINK      = clang++
-QMAKE_CXXFLAGS  = -std=c++11 -g
+QMAKE_CXXFLAGS  = -std=c++11
 MOC_DIR         = build/moc
 UI_DIR          = build/ui
 
@@ -17,19 +17,12 @@ unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/
 DESTDIR         = bin
 TEMPLATE        = app
 TARGET          = dbl-gui
-INCLUDEPATH     += . src/mainwindow src
-
-# \
-#                        /usr/include/qt5 \
-#                        /usr/include/qt5/QtGui \
-#                        /usr/include/qt5/QtWidgets \
-#                        /usr/include/qt5/QtNetwork
+INCLUDEPATH     += . src/mainwindow src $(MOC_DIR)
 
 # Input
-HEADERS         += src/gen/ui_mainwindow.h src/mainwindow/mainwindow.hxx src/net/iface.hxx
+HEADERS         += src/gen/ui_mainwindow.h src/mainwindow/mainwindow.hxx
 FORMS           += src/ui/mainwindow.ui
 SOURCES         += src/main.cxx \
                     src/mainwindow/mainwindow.cxx \
                     src/runtime.cxx \
-                    src/net/iface.cxx \
                     src/sys/command.cxx
