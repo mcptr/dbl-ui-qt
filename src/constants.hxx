@@ -1,9 +1,9 @@
-#ifndef ADBLOCKER_CONSTANTS_HXX
-#define ADBLOCKER_CONSTANTS_HXX
+#ifndef DBLUI_CONSTANTS_HXX
+#define DBLUI_CONSTANTS_HXX
 
 #include <string>
 
-namespace adblocker {
+namespace dblui {
 
 } // adblocker
 

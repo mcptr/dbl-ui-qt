@@ -1,14 +1,14 @@
-#ifndef ADBLOCKER_CONSTANTS_HXX
-#define ADBLOCKER_CONSTANTS_HXX
+#ifndef DBLUI_CONSTANTS_HXX
+#define DBLUI_CONSTANTS_HXX
 
 #include <string>
 
-namespace adblocker {
+namespace dblui {
 
 const std::string SOFTWARE_NAME = "DNSBlocker";
 const unsigned short VERSION_MAJOR = 0;
 const unsigned short VERSION_MINOR = 1;
 
-} // adblocker
+} // dblui
 
 #endif

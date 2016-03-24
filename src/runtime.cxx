@@ -2,7 +2,7 @@
 #include <sys/utsname.h>
 
 
-namespace adblocker {
+namespace dblui {
 namespace runtime {
 
 SystemInfo::SystemInfo()
@@ -17,4 +17,4 @@ SystemInfo::SystemInfo()
 }
 
 } // runtime
-} // adblocker
+} // dblui

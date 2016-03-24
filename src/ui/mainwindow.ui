@@ -549,7 +549,7 @@
                  <bool>true</bool>
                 </property>
                 <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                 </property>
                 <property name="clearButtonEnabled">
                  <bool>false</bool>
@@ -689,8 +689,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>560</width>
-             <height>237</height>
+             <width>365</width>
+             <height>173</height>
             </rect>
            </property>
            <attribute name="label">

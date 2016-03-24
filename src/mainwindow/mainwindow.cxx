@@ -12,8 +12,7 @@
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::MainWindow),
-	iface_manager_(std::move(new adblocker::net::IfaceManager()))
+    ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
 	QSystemTrayIcon* tray = new QSystemTrayIcon(QIcon("./icons/icon.png"));
@@ -29,44 +28,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::initialize()
 {
-	iface_manager_->load();
-	// for(auto iface : iface_manager_->get_list()) {
-	// 	if(iface.isValid()) {
-	// 		ui->networkInterface->addItem(iface.humanReadableName());
-	// 	}
-	// }
-
-	ui->softwareName->setText(adblocker::SOFTWARE_NAME.c_str());
+	ui->softwareName->setText(dblui::SOFTWARE_NAME.c_str());
 
 	std::string version = "Version: ";
-	version.append(std::to_string(adblocker::VERSION_MAJOR));
+	version.append(std::to_string(dblui::VERSION_MAJOR));
 	version.append(".");
-	version.append(std::to_string(adblocker::VERSION_MINOR));
+	version.append(std::to_string(dblui::VERSION_MINOR));
 
 	ui->versionLabel->setText(version.c_str());
 
-	auto sysinfo = adblocker::runtime::SystemInfo();
+    auto sysinfo = dblui::runtime::SystemInfo();
 	ui->osName->setText(sysinfo.get_os_name().c_str());
 }
 
 MainWindow::~MainWindow()
 {
-	iface_manager_.reset(nullptr);
 	delete ui;
 }
 
-//void MainWindow::on_networkInterface_currentIndexChanged(int idx)
-//{
-//	// auto iface = iface_manager_->get(idx);
-//	// if(!iface.addressEntries().length()) {
-//	// 	ui->ipv4Address->clear();
-//	// }
-//	// else {
-//	// 	ui->ipv4Address->setText(
-//	// 		iface.addressEntries().at(0).ip().toString()
-//	// 	);
-//	// }
-//}
 
 void MainWindow::on_applyAllButton_released()
 {
