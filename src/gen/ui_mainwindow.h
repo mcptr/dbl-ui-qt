@@ -23,6 +23,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -129,28 +130,6 @@ public:
     QGridLayout *gridLayout_22;
     QLineEdit *servicePassword;
     QCheckBox *disableServicePassword;
-    QWidget *dnsProxyToolbox;
-    QGridLayout *gridLayout_21;
-    QGridLayout *gridLayout_20;
-    QFormLayout *formLayout_3;
-    QLabel *label_2;
-    QGridLayout *gridLayout_19;
-    QSpacerItem *horizontalSpacer_10;
-    QComboBox *dnsProxySoftware;
-    QLabel *label_6;
-    QGridLayout *gridLayout_4;
-    QLineEdit *dnsServerPort;
-    QSpacerItem *horizontalSpacer_11;
-    QLabel *label_11;
-    QLabel *label_12;
-    QLineEdit *dnsPidfile;
-    QLabel *label_13;
-    QHBoxLayout *horizontalLayout_7;
-    QLineEdit *dnsProxyUser;
-    QLineEdit *dnsProxyGroup;
-    QLabel *label_3;
-    QLineEdit *dnsProxyExecutable;
-    QSpacerItem *verticalSpacer_4;
     QWidget *listsTab;
     QGridLayout *gridLayout_9;
     QGridLayout *gridLayout_8;
@@ -175,6 +154,15 @@ public:
     QGridLayout *gridLayout_17;
     QSpacerItem *horizontalSpacer_6;
     QPushButton *pushButton_2;
+    QPushButton *pushButton_3;
+    QWidget *tab;
+    QGridLayout *gridLayout_4;
+    QVBoxLayout *verticalLayout_8;
+    QListView *listView;
+    QHBoxLayout *horizontalLayout_2;
+    QSpacerItem *horizontalSpacer_11;
+    QPushButton *pushButton_4;
+    QPushButton *pushButton_5;
     QStatusBar *statusBar;
     QMenuBar *menuBar;
     QMenu *menuAbout;
@@ -483,7 +471,7 @@ public:
         toolBox->setSizePolicy(sizePolicy2);
         preferencesToolbox = new QWidget();
         preferencesToolbox->setObjectName(QStringLiteral("preferencesToolbox"));
-        preferencesToolbox->setGeometry(QRect(0, 0, 248, 99));
+        preferencesToolbox->setGeometry(QRect(0, 0, 560, 266));
         formLayout_7 = new QFormLayout(preferencesToolbox);
         formLayout_7->setSpacing(6);
         formLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -537,7 +525,7 @@ public:
         toolBox->addItem(preferencesToolbox, QStringLiteral("Preferences"));
         httpToolbox = new QWidget();
         httpToolbox->setObjectName(QStringLiteral("httpToolbox"));
-        httpToolbox->setGeometry(QRect(0, 0, 239, 117));
+        httpToolbox->setGeometry(QRect(0, 0, 560, 237));
         gridLayout_2 = new QGridLayout(httpToolbox);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -592,7 +580,7 @@ public:
         toolBox->addItem(httpToolbox, QStringLiteral("HTTP Responder"));
         serviceToolbox = new QWidget();
         serviceToolbox->setObjectName(QStringLiteral("serviceToolbox"));
-        serviceToolbox->setGeometry(QRect(0, 0, 560, 237));
+        serviceToolbox->setGeometry(QRect(0, 0, 560, 266));
         gridLayout_23 = new QGridLayout(serviceToolbox);
         gridLayout_23->setSpacing(6);
         gridLayout_23->setContentsMargins(11, 11, 11, 11);
@@ -643,12 +631,14 @@ public:
         gridLayout_22->setObjectName(QStringLiteral("gridLayout_22"));
         servicePassword = new QLineEdit(serviceToolbox);
         servicePassword->setObjectName(QStringLiteral("servicePassword"));
+        servicePassword->setEnabled(false);
         servicePassword->setEchoMode(QLineEdit::PasswordEchoOnEdit);
 
         gridLayout_22->addWidget(servicePassword, 0, 0, 1, 1);
 
         disableServicePassword = new QCheckBox(serviceToolbox);
         disableServicePassword->setObjectName(QStringLiteral("disableServicePassword"));
+        disableServicePassword->setChecked(true);
 
         gridLayout_22->addWidget(disableServicePassword, 0, 1, 1, 1);
 
@@ -659,118 +649,6 @@ public:
         gridLayout_23->addLayout(formLayout_2, 0, 0, 1, 1);
 
         toolBox->addItem(serviceToolbox, QStringLiteral("Service"));
-        dnsProxyToolbox = new QWidget();
-        dnsProxyToolbox->setObjectName(QStringLiteral("dnsProxyToolbox"));
-        dnsProxyToolbox->setGeometry(QRect(0, 0, 365, 173));
-        gridLayout_21 = new QGridLayout(dnsProxyToolbox);
-        gridLayout_21->setSpacing(6);
-        gridLayout_21->setContentsMargins(11, 11, 11, 11);
-        gridLayout_21->setObjectName(QStringLiteral("gridLayout_21"));
-        gridLayout_20 = new QGridLayout();
-        gridLayout_20->setSpacing(6);
-        gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
-        formLayout_3 = new QFormLayout();
-        formLayout_3->setSpacing(6);
-        formLayout_3->setObjectName(QStringLiteral("formLayout_3"));
-        label_2 = new QLabel(dnsProxyToolbox);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        formLayout_3->setWidget(0, QFormLayout::LabelRole, label_2);
-
-        gridLayout_19 = new QGridLayout();
-        gridLayout_19->setSpacing(6);
-        gridLayout_19->setObjectName(QStringLiteral("gridLayout_19"));
-        horizontalSpacer_10 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_19->addItem(horizontalSpacer_10, 0, 1, 1, 1);
-
-        dnsProxySoftware = new QComboBox(dnsProxyToolbox);
-        dnsProxySoftware->setObjectName(QStringLiteral("dnsProxySoftware"));
-
-        gridLayout_19->addWidget(dnsProxySoftware, 0, 0, 1, 1);
-
-
-        formLayout_3->setLayout(0, QFormLayout::FieldRole, gridLayout_19);
-
-        label_6 = new QLabel(dnsProxyToolbox);
-        label_6->setObjectName(QStringLiteral("label_6"));
-
-        formLayout_3->setWidget(2, QFormLayout::LabelRole, label_6);
-
-        gridLayout_4 = new QGridLayout();
-        gridLayout_4->setSpacing(6);
-        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        dnsServerPort = new QLineEdit(dnsProxyToolbox);
-        dnsServerPort->setObjectName(QStringLiteral("dnsServerPort"));
-        dnsServerPort->setMaximumSize(QSize(60, 16777215));
-        dnsServerPort->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
-
-        gridLayout_4->addWidget(dnsServerPort, 0, 0, 1, 1);
-
-        horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_4->addItem(horizontalSpacer_11, 0, 2, 1, 1);
-
-        label_11 = new QLabel(dnsProxyToolbox);
-        label_11->setObjectName(QStringLiteral("label_11"));
-
-        gridLayout_4->addWidget(label_11, 0, 1, 1, 1);
-
-
-        formLayout_3->setLayout(2, QFormLayout::FieldRole, gridLayout_4);
-
-        label_12 = new QLabel(dnsProxyToolbox);
-        label_12->setObjectName(QStringLiteral("label_12"));
-
-        formLayout_3->setWidget(3, QFormLayout::LabelRole, label_12);
-
-        dnsPidfile = new QLineEdit(dnsProxyToolbox);
-        dnsPidfile->setObjectName(QStringLiteral("dnsPidfile"));
-
-        formLayout_3->setWidget(3, QFormLayout::FieldRole, dnsPidfile);
-
-        label_13 = new QLabel(dnsProxyToolbox);
-        label_13->setObjectName(QStringLiteral("label_13"));
-
-        formLayout_3->setWidget(4, QFormLayout::LabelRole, label_13);
-
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setSpacing(6);
-        horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
-        dnsProxyUser = new QLineEdit(dnsProxyToolbox);
-        dnsProxyUser->setObjectName(QStringLiteral("dnsProxyUser"));
-
-        horizontalLayout_7->addWidget(dnsProxyUser);
-
-        dnsProxyGroup = new QLineEdit(dnsProxyToolbox);
-        dnsProxyGroup->setObjectName(QStringLiteral("dnsProxyGroup"));
-
-        horizontalLayout_7->addWidget(dnsProxyGroup);
-
-
-        formLayout_3->setLayout(4, QFormLayout::FieldRole, horizontalLayout_7);
-
-        label_3 = new QLabel(dnsProxyToolbox);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        formLayout_3->setWidget(1, QFormLayout::LabelRole, label_3);
-
-        dnsProxyExecutable = new QLineEdit(dnsProxyToolbox);
-        dnsProxyExecutable->setObjectName(QStringLiteral("dnsProxyExecutable"));
-
-        formLayout_3->setWidget(1, QFormLayout::FieldRole, dnsProxyExecutable);
-
-
-        gridLayout_20->addLayout(formLayout_3, 0, 0, 2, 2);
-
-
-        gridLayout_21->addLayout(gridLayout_20, 0, 0, 1, 1);
-
-        verticalSpacer_4 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_21->addItem(verticalSpacer_4, 4, 0, 1, 1);
-
-        toolBox->addItem(dnsProxyToolbox, QStringLiteral("DNS proxy (advanced)"));
 
         gridLayout_5->addWidget(toolBox, 0, 0, 1, 1);
 
@@ -895,7 +773,12 @@ public:
         pushButton_2 = new QPushButton(domainsTab);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
 
-        gridLayout_17->addWidget(pushButton_2, 0, 1, 1, 1);
+        gridLayout_17->addWidget(pushButton_2, 0, 2, 1, 1);
+
+        pushButton_3 = new QPushButton(domainsTab);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+
+        gridLayout_17->addWidget(pushButton_3, 0, 1, 1, 1);
 
 
         verticalLayout_2->addLayout(gridLayout_17);
@@ -904,6 +787,44 @@ public:
         gridLayout_18->addLayout(verticalLayout_2, 0, 0, 1, 1);
 
         tabWidget->addTab(domainsTab, QString());
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        gridLayout_4 = new QGridLayout(tab);
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setContentsMargins(11, 11, 11, 11);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setSpacing(6);
+        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
+        listView = new QListView(tab);
+        listView->setObjectName(QStringLiteral("listView"));
+
+        verticalLayout_8->addWidget(listView);
+
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        horizontalSpacer_11 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer_11);
+
+        pushButton_4 = new QPushButton(tab);
+        pushButton_4->setObjectName(QStringLiteral("pushButton_4"));
+
+        horizontalLayout_2->addWidget(pushButton_4);
+
+        pushButton_5 = new QPushButton(tab);
+        pushButton_5->setObjectName(QStringLiteral("pushButton_5"));
+
+        horizontalLayout_2->addWidget(pushButton_5);
+
+
+        verticalLayout_8->addLayout(horizontalLayout_2);
+
+
+        gridLayout_4->addLayout(verticalLayout_8, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab, QString());
 
         gridLayout_6->addWidget(tabWidget, 0, 0, 1, 1);
 
@@ -939,7 +860,7 @@ public:
         QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
         QObject::connect(disableServicePassword, SIGNAL(toggled(bool)), servicePassword, SLOT(setDisabled(bool)));
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
         toolBox->setCurrentIndex(2);
 
 
@@ -999,26 +920,8 @@ public:
         servicePort->setText(QString());
         servicePort->setPlaceholderText(QApplication::translate("MainWindow", "7654", 0));
         label_17->setText(QApplication::translate("MainWindow", "Password", 0));
-        disableServicePassword->setText(QApplication::translate("MainWindow", "Disable", 0));
+        disableServicePassword->setText(QApplication::translate("MainWindow", "No password", 0));
         toolBox->setItemText(toolBox->indexOf(serviceToolbox), QApplication::translate("MainWindow", "Service", 0));
-        label_2->setText(QApplication::translate("MainWindow", "DNS proxy software", 0));
-        dnsProxySoftware->clear();
-        dnsProxySoftware->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "unbound", 0)
-         << QApplication::translate("MainWindow", "dnsmasq", 0)
-        );
-        label_6->setText(QApplication::translate("MainWindow", "DNS server port", 0));
-        dnsServerPort->setInputMask(QApplication::translate("MainWindow", "99999", 0));
-        dnsServerPort->setPlaceholderText(QApplication::translate("MainWindow", "53", 0));
-        label_11->setText(QApplication::translate("MainWindow", "Requires redirecting traffic", 0));
-        label_12->setText(QApplication::translate("MainWindow", "Pidfile", 0));
-        dnsPidfile->setPlaceholderText(QApplication::translate("MainWindow", "Use default", 0));
-        label_13->setText(QApplication::translate("MainWindow", "Run as", 0));
-        dnsProxyUser->setPlaceholderText(QApplication::translate("MainWindow", "User", 0));
-        dnsProxyGroup->setPlaceholderText(QApplication::translate("MainWindow", "Group", 0));
-        label_3->setText(QApplication::translate("MainWindow", "DNS server executable", 0));
-        dnsProxyExecutable->setPlaceholderText(QApplication::translate("MainWindow", "Find automatically", 0));
-        toolBox->setItemText(toolBox->indexOf(dnsProxyToolbox), QApplication::translate("MainWindow", "DNS proxy (advanced)", 0));
         tabWidget->setTabText(tabWidget->indexOf(settingsTab), QApplication::translate("MainWindow", "Settings", 0));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Name", 0));
@@ -1036,10 +939,13 @@ public:
         comboBox_2->clear();
         comboBox_2->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "All lists", 0)
-         << QApplication::translate("MainWindow", "Whitelisted", 0)
         );
         pushButton_2->setText(QApplication::translate("MainWindow", "Remove", 0));
+        pushButton_3->setText(QApplication::translate("MainWindow", "Whitelist", 0));
         tabWidget->setTabText(tabWidget->indexOf(domainsTab), QApplication::translate("MainWindow", "Domains", 0));
+        pushButton_4->setText(QApplication::translate("MainWindow", "Block", 0));
+        pushButton_5->setText(QApplication::translate("MainWindow", "Remove", 0));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Whitelist", 0));
         menuAbout->setTitle(QApplication::translate("MainWindow", "Help", 0));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi

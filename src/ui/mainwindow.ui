@@ -82,7 +82,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="controlTab">
        <attribute name="title">
@@ -389,8 +389,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>248</width>
-             <height>99</height>
+             <width>560</width>
+             <height>266</height>
             </rect>
            </property>
            <attribute name="label">
@@ -479,8 +479,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>239</width>
-             <height>117</height>
+             <width>560</width>
+             <height>237</height>
             </rect>
            </property>
            <attribute name="label">
@@ -583,7 +583,7 @@
              <x>0</x>
              <y>0</y>
              <width>560</width>
-             <height>237</height>
+             <height>266</height>
             </rect>
            </property>
            <attribute name="label">
@@ -666,6 +666,9 @@
                <layout class="QGridLayout" name="gridLayout_22">
                 <item row="0" column="0">
                  <widget class="QLineEdit" name="servicePassword">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
                   <property name="echoMode">
                    <enum>QLineEdit::PasswordEchoOnEdit</enum>
                   </property>
@@ -674,190 +677,16 @@
                 <item row="0" column="1">
                  <widget class="QCheckBox" name="disableServicePassword">
                   <property name="text">
-                   <string>Disable</string>
+                   <string>No password</string>
+                  </property>
+                  <property name="checked">
+                   <bool>true</bool>
                   </property>
                  </widget>
                 </item>
                </layout>
               </item>
              </layout>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="dnsProxyToolbox">
-           <property name="geometry">
-            <rect>
-             <x>0</x>
-             <y>0</y>
-             <width>365</width>
-             <height>173</height>
-            </rect>
-           </property>
-           <attribute name="label">
-            <string>DNS proxy (advanced)</string>
-           </attribute>
-           <layout class="QGridLayout" name="gridLayout_21">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_20">
-              <item row="0" column="0" rowspan="2" colspan="2">
-               <layout class="QFormLayout" name="formLayout_3">
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label_2">
-                  <property name="text">
-                   <string>DNS proxy software</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="0" column="1">
-                 <layout class="QGridLayout" name="gridLayout_19">
-                  <item row="0" column="1">
-                   <spacer name="horizontalSpacer_10">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QComboBox" name="dnsProxySoftware">
-                    <item>
-                     <property name="text">
-                      <string>unbound</string>
-                     </property>
-                    </item>
-                    <item>
-                     <property name="text">
-                      <string>dnsmasq</string>
-                     </property>
-                    </item>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item row="2" column="0">
-                 <widget class="QLabel" name="label_6">
-                  <property name="text">
-                   <string>DNS server port</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="2" column="1">
-                 <layout class="QGridLayout" name="gridLayout_4">
-                  <item row="0" column="0">
-                   <widget class="QLineEdit" name="dnsServerPort">
-                    <property name="maximumSize">
-                     <size>
-                      <width>60</width>
-                      <height>16777215</height>
-                     </size>
-                    </property>
-                    <property name="inputMask">
-                     <string>99999</string>
-                    </property>
-                    <property name="alignment">
-                     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                    </property>
-                    <property name="placeholderText">
-                     <string>53</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="2">
-                   <spacer name="horizontalSpacer_11">
-                    <property name="orientation">
-                     <enum>Qt::Horizontal</enum>
-                    </property>
-                    <property name="sizeHint" stdset="0">
-                     <size>
-                      <width>40</width>
-                      <height>20</height>
-                     </size>
-                    </property>
-                   </spacer>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QLabel" name="label_11">
-                    <property name="text">
-                     <string>Requires redirecting traffic</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item row="3" column="0">
-                 <widget class="QLabel" name="label_12">
-                  <property name="text">
-                   <string>Pidfile</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QLineEdit" name="dnsPidfile">
-                  <property name="placeholderText">
-                   <string>Use default</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0">
-                 <widget class="QLabel" name="label_13">
-                  <property name="text">
-                   <string>Run as</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="1">
-                 <layout class="QHBoxLayout" name="horizontalLayout_7">
-                  <item>
-                   <widget class="QLineEdit" name="dnsProxyUser">
-                    <property name="placeholderText">
-                     <string>User</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item>
-                   <widget class="QLineEdit" name="dnsProxyGroup">
-                    <property name="placeholderText">
-                     <string>Group</string>
-                    </property>
-                   </widget>
-                  </item>
-                 </layout>
-                </item>
-                <item row="1" column="0">
-                 <widget class="QLabel" name="label_3">
-                  <property name="text">
-                   <string>DNS server executable</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QLineEdit" name="dnsProxyExecutable">
-                  <property name="placeholderText">
-                   <string>Find automatically</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
-             </layout>
-            </item>
-            <item row="4" column="0">
-             <spacer name="verticalSpacer_4">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
             </item>
            </layout>
           </widget>
@@ -980,11 +809,6 @@
                 <string>All lists</string>
                </property>
               </item>
-              <item>
-               <property name="text">
-                <string>Whitelisted</string>
-               </property>
-              </item>
              </widget>
             </item>
             <item>
@@ -1007,8 +831,60 @@
               </property>
              </spacer>
             </item>
-            <item row="0" column="1">
+            <item row="0" column="2">
              <widget class="QPushButton" name="pushButton_2">
+              <property name="text">
+               <string>Remove</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="pushButton_3">
+              <property name="text">
+               <string>Whitelist</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Whitelist</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_4">
+        <item row="0" column="0">
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QListView" name="listView"/>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <spacer name="horizontalSpacer_11">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_4">
+              <property name="text">
+               <string>Block</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_5">
               <property name="text">
                <string>Remove</string>
               </property>

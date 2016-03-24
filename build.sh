@@ -6,4 +6,4 @@ QMAKE_BIN="$QT_BINDIR/qmake"
 
 $QMAKE_BIN -Wall -recursive
 $UIC_BIN src/ui/mainwindow.ui -o src/gen/ui_mainwindow.h
-make
+make -j4

@@ -3,3 +3,5 @@ build/
 ui.pro.user*
 
 Makefile
+
+*.autosave
