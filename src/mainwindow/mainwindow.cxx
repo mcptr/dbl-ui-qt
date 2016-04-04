@@ -114,7 +114,7 @@ void MainWindow::initialize()
 	settings.endGroup();
 	// --
 
-	settings.beginGroup(dblui::SETTINGS_GROUP_PREFERENCES);
+	settings.beginGroup(dblui::SETTINGS_GROUP_HTTP_RESPONDER);
 
 	ui->enableHttpResponder->setCheckState(
 		settings.value(dblui::CFG_HTTP_RESPONDER_ENABLE).toBool()
@@ -160,6 +160,8 @@ void MainWindow::saveSettings()
 	);
 
 	settings.endGroup();
+	// --
+
 	settings.beginGroup(dblui::SETTINGS_GROUP_SERVICE);
 
 	if(disableServicePassword) {
@@ -185,6 +187,7 @@ void MainWindow::saveSettings()
 	);
 	
 	settings.endGroup();
+	// --
 
 	settings.beginGroup(dblui::SETTINGS_GROUP_PREFERENCES);
 
@@ -202,6 +205,27 @@ void MainWindow::saveSettings()
 		dblui::CFG_PREFERENCES_ENABLE_STATS_UNIQUE_ID,
 		ui->preferencesEnableStatsUniqueID->isChecked()
 	);
+
+	settings.endGroup();
+	// --
+
+	settings.beginGroup(dblui::SETTINGS_GROUP_HTTP_RESPONDER);
+
+	settings.setValue(
+		dblui::CFG_HTTP_RESPONDER_ENABLE,
+		ui->enableHttpResponder->isChecked()
+	);
+
+	settings.setValue(
+		dblui::CFG_HTTP_RESPONDER_STATUS_CODE,
+		ui->httpResponderStatusCode->text()
+	);
+
+	settings.setValue(
+		dblui::CFG_HTTP_RESPONDER_STATUS_TEXT,
+		ui->httpResponderStatusText->text()
+	);
+
 
 	settings.endGroup();
 

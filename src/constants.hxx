@@ -18,7 +18,7 @@ const QString SETTINGS_GROUP_PREFERENCES = "PREFERENCES";
 const QString SETTINGS_GROUP_HTTP_RESPONDER = "HTTP-RESPONDER";
 
 const QString CFG_POSITION = "position";
-const QString CFG_SIZE = "position";
+const QString CFG_SIZE = "size";
 const QString CFG_DISABLE_SERVICE_PASSWORD = "disableServicePassword";
 const QString CFG_SAVE_SERVICE_PASSWORD = "saveServicePassword";
 const QString CFG_SERVICE_PASSWORD = "servicePassword";
