@@ -382,7 +382,7 @@
            </sizepolicy>
           </property>
           <property name="currentIndex">
-           <number>2</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="preferencesToolbox">
            <property name="geometry">
@@ -409,7 +409,7 @@
               <item row="0" column="1">
                <layout class="QGridLayout" name="gridLayout_16">
                 <item row="0" column="0">
-                 <widget class="QComboBox" name="comboBox">
+                 <widget class="QComboBox" name="preferencesUpdateInterval">
                   <item>
                    <property name="text">
                     <string>Never</string>
@@ -450,7 +450,7 @@
                </widget>
               </item>
               <item row="1" column="1">
-               <widget class="QCheckBox" name="enableStatsUpload">
+               <widget class="QCheckBox" name="preferencesEnableStatsUpload">
                 <property name="text">
                  <string>Enable</string>
                 </property>
@@ -464,7 +464,7 @@
                </widget>
               </item>
               <item row="2" column="1">
-               <widget class="QCheckBox" name="checkBox_2">
+               <widget class="QCheckBox" name="preferencesEnableStatsUniqueID">
                 <property name="text">
                  <string>Enable</string>
                 </property>
@@ -602,7 +602,7 @@
               <item row="0" column="1">
                <layout class="QGridLayout" name="gridLayout_3">
                 <item row="0" column="0">
-                 <widget class="QLineEdit" name="serviceIPAddress">
+                 <widget class="QLineEdit" name="serviceAddress">
                   <property name="alignment">
                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                   </property>

@@ -102,12 +102,12 @@ public:
     QFormLayout *formLayout_6;
     QLabel *label_10;
     QGridLayout *gridLayout_16;
-    QComboBox *comboBox;
+    QComboBox *preferencesUpdateInterval;
     QSpacerItem *horizontalSpacer_8;
     QLabel *label_18;
-    QCheckBox *enableStatsUpload;
+    QCheckBox *preferencesEnableStatsUpload;
     QLabel *label_19;
-    QCheckBox *checkBox_2;
+    QCheckBox *preferencesEnableStatsUniqueID;
     QWidget *httpToolbox;
     QGridLayout *gridLayout_2;
     QFormLayout *formLayout;
@@ -122,7 +122,7 @@ public:
     QFormLayout *formLayout_2;
     QLabel *label_14;
     QGridLayout *gridLayout_3;
-    QLineEdit *serviceIPAddress;
+    QLineEdit *serviceAddress;
     QSpacerItem *horizontalSpacer_9;
     QLabel *label;
     QLineEdit *servicePort;
@@ -488,10 +488,10 @@ public:
         gridLayout_16 = new QGridLayout();
         gridLayout_16->setSpacing(6);
         gridLayout_16->setObjectName(QStringLiteral("gridLayout_16"));
-        comboBox = new QComboBox(preferencesToolbox);
-        comboBox->setObjectName(QStringLiteral("comboBox"));
+        preferencesUpdateInterval = new QComboBox(preferencesToolbox);
+        preferencesUpdateInterval->setObjectName(QStringLiteral("preferencesUpdateInterval"));
 
-        gridLayout_16->addWidget(comboBox, 0, 0, 1, 1);
+        gridLayout_16->addWidget(preferencesUpdateInterval, 0, 0, 1, 1);
 
         horizontalSpacer_8 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -505,20 +505,20 @@ public:
 
         formLayout_6->setWidget(1, QFormLayout::LabelRole, label_18);
 
-        enableStatsUpload = new QCheckBox(preferencesToolbox);
-        enableStatsUpload->setObjectName(QStringLiteral("enableStatsUpload"));
+        preferencesEnableStatsUpload = new QCheckBox(preferencesToolbox);
+        preferencesEnableStatsUpload->setObjectName(QStringLiteral("preferencesEnableStatsUpload"));
 
-        formLayout_6->setWidget(1, QFormLayout::FieldRole, enableStatsUpload);
+        formLayout_6->setWidget(1, QFormLayout::FieldRole, preferencesEnableStatsUpload);
 
         label_19 = new QLabel(preferencesToolbox);
         label_19->setObjectName(QStringLiteral("label_19"));
 
         formLayout_6->setWidget(2, QFormLayout::LabelRole, label_19);
 
-        checkBox_2 = new QCheckBox(preferencesToolbox);
-        checkBox_2->setObjectName(QStringLiteral("checkBox_2"));
+        preferencesEnableStatsUniqueID = new QCheckBox(preferencesToolbox);
+        preferencesEnableStatsUniqueID->setObjectName(QStringLiteral("preferencesEnableStatsUniqueID"));
 
-        formLayout_6->setWidget(2, QFormLayout::FieldRole, checkBox_2);
+        formLayout_6->setWidget(2, QFormLayout::FieldRole, preferencesEnableStatsUniqueID);
 
 
         formLayout_7->setLayout(0, QFormLayout::LabelRole, formLayout_6);
@@ -597,11 +597,11 @@ public:
         gridLayout_3 = new QGridLayout();
         gridLayout_3->setSpacing(6);
         gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
-        serviceIPAddress = new QLineEdit(serviceToolbox);
-        serviceIPAddress->setObjectName(QStringLiteral("serviceIPAddress"));
-        serviceIPAddress->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        serviceAddress = new QLineEdit(serviceToolbox);
+        serviceAddress->setObjectName(QStringLiteral("serviceAddress"));
+        serviceAddress->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
 
-        gridLayout_3->addWidget(serviceIPAddress, 0, 0, 1, 1);
+        gridLayout_3->addWidget(serviceAddress, 0, 0, 1, 1);
 
         horizontalSpacer_9 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -867,7 +867,7 @@ public:
         QObject::connect(disableServicePassword, SIGNAL(toggled(bool)), servicePassword, SLOT(setDisabled(bool)));
 
         tabWidget->setCurrentIndex(1);
-        toolBox->setCurrentIndex(2);
+        toolBox->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -900,16 +900,16 @@ public:
         versionLabel->setText(QApplication::translate("MainWindow", "UI Version:", 0));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "Control", 0));
         label_10->setText(QApplication::translate("MainWindow", "Update blocking rules:", 0));
-        comboBox->clear();
-        comboBox->insertItems(0, QStringList()
+        preferencesUpdateInterval->clear();
+        preferencesUpdateInterval->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "Never", 0)
          << QApplication::translate("MainWindow", "Daily", 0)
          << QApplication::translate("MainWindow", "Weekly", 0)
         );
         label_18->setText(QApplication::translate("MainWindow", "Domain stats upload", 0));
-        enableStatsUpload->setText(QApplication::translate("MainWindow", "Enable", 0));
+        preferencesEnableStatsUpload->setText(QApplication::translate("MainWindow", "Enable", 0));
         label_19->setText(QApplication::translate("MainWindow", "Stats unique id", 0));
-        checkBox_2->setText(QApplication::translate("MainWindow", "Enable", 0));
+        preferencesEnableStatsUniqueID->setText(QApplication::translate("MainWindow", "Enable", 0));
         toolBox->setItemText(toolBox->indexOf(preferencesToolbox), QApplication::translate("MainWindow", "Preferences", 0));
         enableHttpResponder->setText(QString());
         httpResponderStatusText->setText(QApplication::translate("MainWindow", "Not found", 0));
@@ -920,7 +920,7 @@ public:
         enableHttpResponderLabel->setText(QApplication::translate("MainWindow", "Enable http responder", 0));
         toolBox->setItemText(toolBox->indexOf(httpToolbox), QApplication::translate("MainWindow", "HTTP Responder", 0));
         label_14->setText(QApplication::translate("MainWindow", "Address", 0));
-        serviceIPAddress->setPlaceholderText(QApplication::translate("MainWindow", "127.0.0.1", 0));
+        serviceAddress->setPlaceholderText(QApplication::translate("MainWindow", "127.0.0.1", 0));
         label->setText(QApplication::translate("MainWindow", "Service port", 0));
         servicePort->setInputMask(QApplication::translate("MainWindow", "99999", 0));
         servicePort->setText(QString());
