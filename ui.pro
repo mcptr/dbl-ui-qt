@@ -7,16 +7,18 @@ OBJECTS_DIR     = build/objects
 QMAKE_CC        = clang
 QMAKE_CXX       = clang++
 QMAKE_LINK      = clang++
-QMAKE_CXXFLAGS  = -std=c++11
+QMAKE_CXXFLAGS  = -std=c++11 -pipe -Wall -Wextra -pedantic
 MOC_DIR         = build/moc
 UI_DIR          = build/ui
 
-QT              +=  core gui widgets network
+DBL_OBJECTS_DIR = ../service/build/objs/dbl/
+
+QT              +=  core gui widgets concurrent
 unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/ \
                     -L$(HOME)/Qt/5.5/gcc_64/lib \
                     -L$(VIRTUAL_ENV)/lib
 
-LIBS            += -lboost_system -lcrypto -ldblclient
+LIBS            += -lboost_system -lcrypto -ldblclient -ljsoncpp
 
 DESTDIR         = bin
 TEMPLATE        = app
@@ -26,9 +28,17 @@ INCLUDEPATH     += . src src/mainwindow \
                      $(VIRTUAL_ENV)/include
 
 # Input
-HEADERS         += src/gen/ui_mainwindow.h src/mainwindow/mainwindow.hxx
+HEADERS         += src/gen/ui_mainwindow.h
 FORMS           += src/ui/mainwindow.ui
 SOURCES         += src/main.cxx \
+                    src/client/worker.cxx \
+                    src/client/client.cxx \
                     src/mainwindow/mainwindow.cxx \
                     src/runtime.cxx \
-                    src/sys/command.cxx
+                    src/sys/command.cxx \
+                    build/moc/moc_mainwindow.cxx \
+                    build/moc/moc_worker.cxx
+
+
+
+OBJECTS         += $${DBL_OBJECTS_DIR}/status/status.o

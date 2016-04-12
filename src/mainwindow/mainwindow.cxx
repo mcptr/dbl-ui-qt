@@ -3,21 +3,23 @@
 #include "runtime.hxx"
 #include "constants.hxx"
 
-#include <string>
 #include <dbl/util/crypto.hxx>
+
+#include <string>
 
 #include <QSystemTrayIcon>
 #include <QMenu>
 #include <QDebug>
 #include <QSettings>
 #include <QCloseEvent>
-
+#include <QThread>
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
-	ui(new Ui::MainWindow)
+	ui_(new Ui::MainWindow),
+	worker_(new dblui::Worker(parent))
 {
-	ui->setupUi(this);
+	ui_->setupUi(this);
 	QSystemTrayIcon* tray = new QSystemTrayIcon(QIcon("./icons/icon.png"));
 	QMenu* trayMenu = new QMenu();
 	trayMenu->addAction("Hide");
@@ -26,27 +28,42 @@ MainWindow::MainWindow(QWidget *parent) :
 	tray->setContextMenu(trayMenu);
 	tray->show();
 
+	worker_thread_ = new QThread();
+	worker_->moveToThread(worker_thread_);
+
+	connect(worker_, SIGNAL(log(const QString&)), this, SLOT(appendLog(const QString&)));
+	connect(worker_, SIGNAL(connection_status(bool)), this, SLOT(on_connection_status(bool)));
+
+	connect(
+		this,
+		SIGNAL(ui_initialized(const QString&, int)),
+		worker_,
+		SLOT(create_connection(const QString&, int))
+	);
+
+	worker_thread_->start();
 	initialize();
 }
 
 MainWindow::~MainWindow()
 {
-	delete ui;
+	delete ui_;
 }
 
 void MainWindow::initialize()
 {
-	ui->softwareName->setText(dblui::SOFTWARE_NAME);
+	statusBar()->showMessage("Initializing...");
+	ui_->softwareName->setText(dblui::SOFTWARE_NAME);
 
 	QString version = "Version: ";
-	version.append(dblui::VERSION_MAJOR);
+	version.append(QString::number(dblui::VERSION_MAJOR));
 	version.append(".");
-	version.append(dblui::VERSION_MINOR);
+	version.append(QString::number(dblui::VERSION_MINOR));
 
-	ui->versionLabel->setText(version);
+	ui_->versionLabel->setText(version);
 
 	auto sysinfo = dblui::runtime::SystemInfo();
-	ui->osName->setText(sysinfo.get_os_name().c_str());
+	//ui_->osName->setText(sysinfo.get_os_name().c_str());
 
 	QSettings settings(
 		dblui::SETTINGS_IDENT,
@@ -55,8 +72,8 @@ void MainWindow::initialize()
 
 	settings.beginGroup(dblui::SETTINGS_GROUP_UI);
 
-	resize(settings.value(dblui::CFG_POSITION, QSize(400, 400)).toSize());
-	move(settings.value(dblui::CFG_SIZE, QPoint(200, 200)).toPoint());
+	resize(settings.value(dblui::CFG_SIZE, QSize(400, 400)).toSize());
+	move(settings.value(dblui::CFG_POSITION, QPoint(200, 200)).toPoint());
 
 	bool disableServicePassword = settings.value(
 		dblui::CFG_DISABLE_SERVICE_PASSWORD, "").toBool();
@@ -64,11 +81,11 @@ void MainWindow::initialize()
 	bool saveServicePassword = settings.value(
 		dblui::CFG_SAVE_SERVICE_PASSWORD, "").toBool();
 
-	ui->disableServicePassword->setCheckState(
+	ui_->disableServicePassword->setCheckState(
 		disableServicePassword ? Qt::Checked : Qt::Unchecked
 	);
 
-	ui->saveServicePassword->setCheckState(
+	ui_->saveServicePassword->setCheckState(
 		saveServicePassword ? Qt::Checked : Qt::Unchecked
 	);
 
@@ -87,26 +104,26 @@ void MainWindow::initialize()
 	settings.endGroup();
 	// --
 
-	ui->serviceAddress->setText(serviceAddress);
-	ui->servicePort->setText(QString::number(servicePort));
+	ui_->serviceAddress->setText(serviceAddress);
+	ui_->servicePort->setText(QString::number(servicePort));
 
 	if(!servicePassword.isEmpty()) {
-		ui->disableServicePassword->setCheckState(Qt::Unchecked);
-		ui->servicePassword->setPlaceholderText("Password is set");
+		ui_->disableServicePassword->setCheckState(Qt::Unchecked);
+		ui_->servicePassword->setPlaceholderText("Password is set");
 	}
 
 	settings.beginGroup(dblui::SETTINGS_GROUP_PREFERENCES);
 
-	ui->preferencesUpdateInterval->setCurrentIndex(
+	ui_->preferencesUpdateInterval->setCurrentIndex(
 		settings.value(dblui::CFG_PREFERENCES_UPDATE_INTERVAL).toInt()
 	);
 
-	ui->preferencesEnableStatsUpload->setCheckState(
+	ui_->preferencesEnableStatsUpload->setCheckState(
 		settings.value(dblui::CFG_PREFERENCES_ENABLE_STATS_UPLOAD).toBool()
 		? Qt::Checked : Qt::Unchecked
 	);
 
-	ui->preferencesEnableStatsUniqueID->setCheckState(
+	ui_->preferencesEnableStatsUniqueID->setCheckState(
 		settings.value(dblui::CFG_PREFERENCES_ENABLE_STATS_UNIQUE_ID).toBool()
 		? Qt::Checked : Qt::Unchecked
 	);
@@ -116,7 +133,7 @@ void MainWindow::initialize()
 
 	settings.beginGroup(dblui::SETTINGS_GROUP_HTTP_RESPONDER);
 
-	ui->enableHttpResponder->setCheckState(
+	ui_->enableHttpResponder->setCheckState(
 		settings.value(dblui::CFG_HTTP_RESPONDER_ENABLE).toBool()
 		? Qt::Checked : Qt::Unchecked
 	);
@@ -124,22 +141,25 @@ void MainWindow::initialize()
 	int status_code = settings.value(dblui::CFG_HTTP_RESPONDER_STATUS_CODE).toInt();
 
 	if(status_code) {
-		ui->httpResponderStatusCode->setText(QString::number(status_code));
+		ui_->httpResponderStatusCode->setText(QString::number(status_code));
 	}
 
 	QString status_text = settings.value(dblui::CFG_HTTP_RESPONDER_STATUS_TEXT).toString();
 	if(!status_text.isEmpty()) {
-		ui->httpResponderStatusText->setText(status_text);
+		ui_->httpResponderStatusText->setText(status_text);
 	}
 
 	settings.endGroup();
-	// --
+
+	int port = ui_->servicePort->text().toInt();
+
+	emit ui_initialized(ui_->serviceAddress->text(), port);
 }
 
 void MainWindow::saveSettings()
 {
-	bool disableServicePassword = ui->disableServicePassword->isChecked();
-	bool saveServicePassword = ui->saveServicePassword->isChecked();
+	bool disableServicePassword = ui_->disableServicePassword->isChecked();
+	bool saveServicePassword = ui_->saveServicePassword->isChecked();
 
 	QSettings settings(
 		dblui::SETTINGS_IDENT,
@@ -168,7 +188,7 @@ void MainWindow::saveSettings()
 		settings.remove(dblui::CFG_SERVICE_PASSWORD);
 	}
 	else if(saveServicePassword) {
-		std::string password(ui->servicePassword->text().toUtf8().constData());
+		std::string password(ui_->servicePassword->text().toUtf8().constData());
 
 		settings.setValue(
 			dblui::CFG_SERVICE_PASSWORD,
@@ -178,12 +198,12 @@ void MainWindow::saveSettings()
 
 	settings.setValue(
 		dblui::CFG_SERVICE_ADDRESS,
-		ui->serviceAddress->text()
+		ui_->serviceAddress->text()
 	);
 
 	settings.setValue(
 		dblui::CFG_SERVICE_PORT,
-		ui->servicePort->text()
+		ui_->servicePort->text()
 	);
 	
 	settings.endGroup();
@@ -193,17 +213,17 @@ void MainWindow::saveSettings()
 
 	settings.setValue(
 		dblui::CFG_PREFERENCES_UPDATE_INTERVAL,
-		ui->preferencesUpdateInterval->currentIndex()
+		ui_->preferencesUpdateInterval->currentIndex()
 	);
 
 	settings.setValue(
 		dblui::CFG_PREFERENCES_ENABLE_STATS_UPLOAD,
-		ui->preferencesEnableStatsUpload->isChecked()
+		ui_->preferencesEnableStatsUpload->isChecked()
 	);
 
 	settings.setValue(
 		dblui::CFG_PREFERENCES_ENABLE_STATS_UNIQUE_ID,
-		ui->preferencesEnableStatsUniqueID->isChecked()
+		ui_->preferencesEnableStatsUniqueID->isChecked()
 	);
 
 	settings.endGroup();
@@ -213,22 +233,20 @@ void MainWindow::saveSettings()
 
 	settings.setValue(
 		dblui::CFG_HTTP_RESPONDER_ENABLE,
-		ui->enableHttpResponder->isChecked()
+		ui_->enableHttpResponder->isChecked()
 	);
 
 	settings.setValue(
 		dblui::CFG_HTTP_RESPONDER_STATUS_CODE,
-		ui->httpResponderStatusCode->text()
+		ui_->httpResponderStatusCode->text()
 	);
 
 	settings.setValue(
 		dblui::CFG_HTTP_RESPONDER_STATUS_TEXT,
-		ui->httpResponderStatusText->text()
+		ui_->httpResponderStatusText->text()
 	);
 
-
 	settings.endGroup();
-
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -240,4 +258,29 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::on_applyAllButton_released()
 {
 	this->setEnabled(0);
+}
+
+void MainWindow::on_controlRestartButton_released()
+{
+	ui_->controlRestartButton->setEnabled(0);
+	//emit 
+	// try {
+	// 	statusBar()->showMessage("Restarting service");
+	// 	//client_->session().send_reload();
+	// 	start_session();
+	// }
+	// catch(const dblclient::DBLClientError& e) {
+	// 	statusBar()->showMessage("Failed to restart");
+	// }
+	ui_->controlRestartButton->setEnabled(1);
+}
+
+void MainWindow::appendLog(const QString& msg)
+{
+	ui_->actionLog->appendPlainText(msg);
+}
+
+void MainWindow::on_connection_status(bool ok)
+{
+	statusBar()->showMessage((ok ? "Connected" : "Connection failed"));
 }

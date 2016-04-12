@@ -28,6 +28,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
@@ -58,15 +59,15 @@ public:
     QGridLayout *gridLayout_10;
     QVBoxLayout *verticalLayout_3;
     QWidget *widget;
-    QGridLayout *gridLayout_15;
-    QLabel *label_4;
-    QFrame *line_2;
+    QGridLayout *gridLayout_20;
+    QPlainTextEdit *actionLog;
+    QSpacerItem *verticalSpacer_2;
+    QFrame *line_4;
+    QFrame *line;
     QHBoxLayout *horizontalLayout_8;
     QLineEdit *lineEdit_2;
     QPushButton *checkDomainButton;
     QPushButton *toggleDomainButton;
-    QGridLayout *gridLayout_14;
-    QVBoxLayout *verticalLayout_7;
     QVBoxLayout *verticalLayout_5;
     QFrame *line_3;
     QLabel *label_9;
@@ -77,23 +78,13 @@ public:
     QPushButton *pushButton_7;
     QPushButton *checkForUpdatesButton;
     QSpacerItem *horizontalSpacer_3;
-    QFrame *line;
-    QVBoxLayout *verticalLayout_6;
-    QGridLayout *gridLayout_12;
-    QLabel *label_7;
-    QSpacerItem *horizontalSpacer_4;
-    QGridLayout *gridLayout_13;
-    QLabel *label_8;
-    QSpacerItem *horizontalSpacer_5;
-    QLabel *label_5;
-    QLabel *osName;
+    QLabel *label_4;
+    QFrame *line_2;
     QGridLayout *gridLayout_11;
     QVBoxLayout *verticalLayout_4;
     QLabel *softwareName;
     QLabel *versionLabel;
     QSpacerItem *horizontalSpacer_7;
-    QSpacerItem *verticalSpacer_2;
-    QFrame *line_4;
     QWidget *settingsTab;
     QGridLayout *gridLayout_5;
     QToolBox *toolBox;
@@ -240,21 +231,33 @@ public:
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
         widget = new QWidget(controlTab);
         widget->setObjectName(QStringLiteral("widget"));
-        gridLayout_15 = new QGridLayout(widget);
-        gridLayout_15->setSpacing(6);
-        gridLayout_15->setContentsMargins(11, 11, 11, 11);
-        gridLayout_15->setObjectName(QStringLiteral("gridLayout_15"));
-        label_4 = new QLabel(widget);
-        label_4->setObjectName(QStringLiteral("label_4"));
+        gridLayout_20 = new QGridLayout(widget);
+        gridLayout_20->setSpacing(6);
+        gridLayout_20->setContentsMargins(11, 11, 11, 11);
+        gridLayout_20->setObjectName(QStringLiteral("gridLayout_20"));
+        actionLog = new QPlainTextEdit(widget);
+        actionLog->setObjectName(QStringLiteral("actionLog"));
+        actionLog->setReadOnly(true);
 
-        gridLayout_15->addWidget(label_4, 4, 0, 1, 1);
+        gridLayout_20->addWidget(actionLog, 3, 0, 1, 1);
 
-        line_2 = new QFrame(widget);
-        line_2->setObjectName(QStringLiteral("line_2"));
-        line_2->setFrameShape(QFrame::HLine);
-        line_2->setFrameShadow(QFrame::Sunken);
+        verticalSpacer_2 = new QSpacerItem(537, 23, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        gridLayout_15->addWidget(line_2, 5, 0, 1, 1);
+        gridLayout_20->addItem(verticalSpacer_2, 4, 0, 1, 1);
+
+        line_4 = new QFrame(widget);
+        line_4->setObjectName(QStringLiteral("line_4"));
+        line_4->setFrameShape(QFrame::HLine);
+        line_4->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_20->addWidget(line_4, 5, 0, 1, 1);
+
+        line = new QFrame(widget);
+        line->setObjectName(QStringLiteral("line"));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_20->addWidget(line, 2, 0, 1, 1);
 
         horizontalLayout_8 = new QHBoxLayout();
         horizontalLayout_8->setSpacing(6);
@@ -275,14 +278,8 @@ public:
         horizontalLayout_8->addWidget(toggleDomainButton);
 
 
-        gridLayout_15->addLayout(horizontalLayout_8, 3, 0, 1, 1);
+        gridLayout_20->addLayout(horizontalLayout_8, 6, 0, 1, 1);
 
-        gridLayout_14 = new QGridLayout();
-        gridLayout_14->setSpacing(6);
-        gridLayout_14->setObjectName(QStringLiteral("gridLayout_14"));
-        verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setSpacing(6);
-        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setObjectName(QStringLiteral("verticalLayout_5"));
@@ -340,68 +337,19 @@ public:
         verticalLayout_5->addLayout(horizontalLayout_5);
 
 
-        verticalLayout_7->addLayout(verticalLayout_5);
+        gridLayout_20->addLayout(verticalLayout_5, 1, 0, 1, 1);
 
-        line = new QFrame(widget);
-        line->setObjectName(QStringLiteral("line"));
-        line->setFrameShape(QFrame::HLine);
-        line->setFrameShadow(QFrame::Sunken);
+        label_4 = new QLabel(widget);
+        label_4->setObjectName(QStringLiteral("label_4"));
 
-        verticalLayout_7->addWidget(line);
+        gridLayout_20->addWidget(label_4, 7, 0, 1, 1);
 
-        verticalLayout_6 = new QVBoxLayout();
-        verticalLayout_6->setSpacing(6);
-        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
-        gridLayout_12 = new QGridLayout();
-        gridLayout_12->setSpacing(6);
-        gridLayout_12->setObjectName(QStringLiteral("gridLayout_12"));
-        label_7 = new QLabel(widget);
-        label_7->setObjectName(QStringLiteral("label_7"));
-        QFont font2;
-        font2.setPointSize(11);
-        font2.setBold(true);
-        font2.setWeight(75);
-        label_7->setFont(font2);
+        line_2 = new QFrame(widget);
+        line_2->setObjectName(QStringLiteral("line_2"));
+        line_2->setFrameShape(QFrame::HLine);
+        line_2->setFrameShadow(QFrame::Sunken);
 
-        gridLayout_12->addWidget(label_7, 0, 0, 1, 1);
-
-        horizontalSpacer_4 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_12->addItem(horizontalSpacer_4, 0, 1, 1, 1);
-
-
-        verticalLayout_6->addLayout(gridLayout_12);
-
-        gridLayout_13 = new QGridLayout();
-        gridLayout_13->setSpacing(6);
-        gridLayout_13->setObjectName(QStringLiteral("gridLayout_13"));
-        label_8 = new QLabel(widget);
-        label_8->setObjectName(QStringLiteral("label_8"));
-
-        gridLayout_13->addWidget(label_8, 1, 1, 1, 1);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        gridLayout_13->addItem(horizontalSpacer_5, 1, 3, 1, 1);
-
-        label_5 = new QLabel(widget);
-        label_5->setObjectName(QStringLiteral("label_5"));
-
-        gridLayout_13->addWidget(label_5, 1, 0, 1, 1);
-
-        osName = new QLabel(widget);
-        osName->setObjectName(QStringLiteral("osName"));
-
-        gridLayout_13->addWidget(osName, 0, 0, 1, 1);
-
-
-        verticalLayout_6->addLayout(gridLayout_13);
-
-
-        verticalLayout_7->addLayout(verticalLayout_6);
-
-
-        gridLayout_14->addLayout(verticalLayout_7, 1, 0, 1, 1);
+        gridLayout_20->addWidget(line_2, 8, 0, 1, 1);
 
         gridLayout_11 = new QGridLayout();
         gridLayout_11->setSpacing(6);
@@ -411,12 +359,12 @@ public:
         verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
         softwareName = new QLabel(widget);
         softwareName->setObjectName(QStringLiteral("softwareName"));
-        QFont font3;
-        font3.setFamily(QStringLiteral("DejaVu Sans"));
-        font3.setPointSize(16);
-        font3.setBold(true);
-        font3.setWeight(75);
-        softwareName->setFont(font3);
+        QFont font2;
+        font2.setFamily(QStringLiteral("DejaVu Sans"));
+        font2.setPointSize(16);
+        font2.setBold(true);
+        font2.setWeight(75);
+        softwareName->setFont(font2);
 
         verticalLayout_4->addWidget(softwareName);
 
@@ -433,22 +381,14 @@ public:
         gridLayout_11->addItem(horizontalSpacer_7, 0, 1, 1, 1);
 
 
-        gridLayout_14->addLayout(gridLayout_11, 0, 0, 1, 1);
+        gridLayout_20->addLayout(gridLayout_11, 0, 0, 1, 1);
 
-
-        gridLayout_15->addLayout(gridLayout_14, 0, 0, 1, 1);
-
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        gridLayout_15->addItem(verticalSpacer_2, 1, 0, 1, 1);
-
-        line_4 = new QFrame(widget);
-        line_4->setObjectName(QStringLiteral("line_4"));
-        line_4->setFrameShape(QFrame::HLine);
-        line_4->setFrameShadow(QFrame::Sunken);
-
-        gridLayout_15->addWidget(line_4, 2, 0, 1, 1);
-
+        line->raise();
+        label_4->raise();
+        line_2->raise();
+        line_4->raise();
+        actionLog->raise();
+        versionLabel->raise();
 
         verticalLayout_3->addWidget(widget);
 
@@ -472,7 +412,7 @@ public:
         toolBox->setSizePolicy(sizePolicy2);
         preferencesToolbox = new QWidget();
         preferencesToolbox->setObjectName(QStringLiteral("preferencesToolbox"));
-        preferencesToolbox->setGeometry(QRect(0, 0, 560, 266));
+        preferencesToolbox->setGeometry(QRect(0, 0, 248, 99));
         formLayout_7 = new QFormLayout(preferencesToolbox);
         formLayout_7->setSpacing(6);
         formLayout_7->setContentsMargins(11, 11, 11, 11);
@@ -526,7 +466,7 @@ public:
         toolBox->addItem(preferencesToolbox, QStringLiteral("Preferences"));
         httpToolbox = new QWidget();
         httpToolbox->setObjectName(QStringLiteral("httpToolbox"));
-        httpToolbox->setGeometry(QRect(0, 0, 560, 237));
+        httpToolbox->setGeometry(QRect(0, 0, 560, 277));
         gridLayout_2 = new QGridLayout(httpToolbox);
         gridLayout_2->setSpacing(6);
         gridLayout_2->setContentsMargins(11, 11, 11, 11);
@@ -581,7 +521,7 @@ public:
         toolBox->addItem(httpToolbox, QStringLiteral("HTTP Responder"));
         serviceToolbox = new QWidget();
         serviceToolbox->setObjectName(QStringLiteral("serviceToolbox"));
-        serviceToolbox->setGeometry(QRect(0, 0, 560, 266));
+        serviceToolbox->setGeometry(QRect(0, 0, 233, 132));
         gridLayout_23 = new QGridLayout(serviceToolbox);
         gridLayout_23->setSpacing(6);
         gridLayout_23->setContentsMargins(11, 11, 11, 11);
@@ -866,8 +806,8 @@ public:
         QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
         QObject::connect(disableServicePassword, SIGNAL(toggled(bool)), servicePassword, SLOT(setDisabled(bool)));
 
-        tabWidget->setCurrentIndex(1);
-        toolBox->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(0);
+        toolBox->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -883,7 +823,6 @@ public:
         actionExit->setText(QApplication::translate("MainWindow", "Close", 0));
         applyAllButton->setText(QApplication::translate("MainWindow", "Apply", 0));
         exitButton->setText(QApplication::translate("MainWindow", "Exit", 0));
-        label_4->setText(QApplication::translate("MainWindow", "Resolves to:", 0));
         lineEdit_2->setPlaceholderText(QApplication::translate("MainWindow", "Enter domain or URL", 0));
         checkDomainButton->setText(QApplication::translate("MainWindow", "Check", 0));
         toggleDomainButton->setText(QApplication::translate("MainWindow", "Block/Unblock", 0));
@@ -892,12 +831,9 @@ public:
         controlRestartButton->setText(QApplication::translate("MainWindow", "Restart service", 0));
         pushButton_7->setText(QApplication::translate("MainWindow", "Flush dns", 0));
         checkForUpdatesButton->setText(QApplication::translate("MainWindow", "Check for updates", 0));
-        label_7->setText(QApplication::translate("MainWindow", "Current status", 0));
-        label_8->setText(QApplication::translate("MainWindow", "unknown", 0));
-        label_5->setText(QApplication::translate("MainWindow", "Ad blocking service:", 0));
-        osName->setText(QApplication::translate("MainWindow", "OS", 0));
-        softwareName->setText(QApplication::translate("MainWindow", "DNSBlocker", 0));
-        versionLabel->setText(QApplication::translate("MainWindow", "UI Version:", 0));
+        label_4->setText(QApplication::translate("MainWindow", "Resolves to:", 0));
+        softwareName->setText(QApplication::translate("MainWindow", "DBL", 0));
+        versionLabel->setText(QApplication::translate("MainWindow", "Version", 0));
         tabWidget->setTabText(tabWidget->indexOf(controlTab), QApplication::translate("MainWindow", "Control", 0));
         label_10->setText(QApplication::translate("MainWindow", "Update blocking rules:", 0));
         preferencesUpdateInterval->clear();

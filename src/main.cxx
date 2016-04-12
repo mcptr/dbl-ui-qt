@@ -1,5 +1,11 @@
 #include "mainwindow/mainwindow.hxx"
+#include "client/worker.hxx"
+
 #include <QApplication>
+#include <QDebug>
+#include <QtConcurrent>
+#include <functional>
+
 
 int main(int argc, char *argv[])
 {

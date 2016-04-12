@@ -8,7 +8,7 @@ namespace dblui {
 const unsigned short VERSION_MAJOR = 0;
 const unsigned short VERSION_MINOR = 1;
 
-const QString SOFTWARE_NAME = "DNSBlocker";
+const QString SOFTWARE_NAME = "DBL";
 
 const QString SETTINGS_IDENT = "dbl-ui";
 const QString SETTINGS_NAME = "ui";
