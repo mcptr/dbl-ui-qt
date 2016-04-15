@@ -1,12 +1,15 @@
 #include "client.hxx"
 #include <QThread>
+#include <QDebug>
 
 namespace dblui {
 
-bool Client::connect(const std::string& addr, int port, int loops)
+bool Client::connect(const std::string& addr, int port, int sec)
 {
 	session_.reset(new dblclient::Session());
 	is_connected_ = false;
+	
+	int loops = sec * 10;
 
 	while(loops && !is_connected_) {
 		try {

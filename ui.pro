@@ -13,7 +13,7 @@ UI_DIR          = build/ui
 
 DBL_OBJECTS_DIR = ../service/build/objs/dbl/
 
-QT              +=  core gui widgets concurrent
+QT              +=  core gui widgets
 unix:LIBS       += -L/usr/lib/x86_64-linux-gnu/ \
                     -L$(HOME)/Qt/5.5/gcc_64/lib \
                     -L$(VIRTUAL_ENV)/lib
@@ -38,7 +38,6 @@ SOURCES         += src/main.cxx \
                     src/sys/command.cxx \
                     build/moc/moc_mainwindow.cxx \
                     build/moc/moc_worker.cxx
-
 
 
 OBJECTS         += $${DBL_OBJECTS_DIR}/status/status.o

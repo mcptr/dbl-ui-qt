@@ -15,7 +15,7 @@ public:
 
 	dblclient::Session& session();
 
-	bool connect(const std::string& addr, int port, int loops = 50);
+	bool connect(const std::string& addr, int port, int sec = 5);
 
 	bool load_status(dbl::status::Status& status);
 

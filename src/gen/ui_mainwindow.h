@@ -23,7 +23,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QListView>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -125,7 +124,7 @@ public:
     QWidget *listsTab;
     QGridLayout *gridLayout_9;
     QGridLayout *gridLayout_8;
-    QTableWidget *tableWidget;
+    QTableWidget *listsTable;
     QGroupBox *groupBox;
     QGridLayout *gridLayout_7;
     QFormLayout *formLayout_5;
@@ -141,16 +140,16 @@ public:
     QGridLayout *gridLayout_18;
     QVBoxLayout *verticalLayout_2;
     QVBoxLayout *verticalLayout;
-    QComboBox *comboBox_2;
-    QListWidget *listWidget;
+    QComboBox *domainListFilter;
+    QListWidget *blockedDomains;
     QGridLayout *gridLayout_17;
     QSpacerItem *horizontalSpacer_6;
     QPushButton *pushButton_2;
     QPushButton *pushButton_3;
     QWidget *tab;
     QGridLayout *gridLayout_4;
-    QVBoxLayout *verticalLayout_8;
-    QListView *listView;
+    QVBoxLayout *verticalLayout_6;
+    QListWidget *whitelistedDomains;
     QHBoxLayout *horizontalLayout_2;
     QSpacerItem *horizontalSpacer_11;
     QPushButton *pushButton_4;
@@ -313,6 +312,7 @@ public:
 
         controlRestartButton = new QPushButton(widget);
         controlRestartButton->setObjectName(QStringLiteral("controlRestartButton"));
+        controlRestartButton->setEnabled(false);
 
         horizontalLayout_4->addWidget(controlRestartButton);
 
@@ -608,21 +608,21 @@ public:
         gridLayout_8 = new QGridLayout();
         gridLayout_8->setSpacing(6);
         gridLayout_8->setObjectName(QStringLiteral("gridLayout_8"));
-        tableWidget = new QTableWidget(listsTab);
-        if (tableWidget->columnCount() < 4)
-            tableWidget->setColumnCount(4);
+        listsTable = new QTableWidget(listsTab);
+        if (listsTable->columnCount() < 4)
+            listsTable->setColumnCount(4);
         QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        listsTable->setHorizontalHeaderItem(0, __qtablewidgetitem);
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        listsTable->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        listsTable->setHorizontalHeaderItem(2, __qtablewidgetitem2);
         QTableWidgetItem *__qtablewidgetitem3 = new QTableWidgetItem();
-        tableWidget->setHorizontalHeaderItem(3, __qtablewidgetitem3);
-        tableWidget->setObjectName(QStringLiteral("tableWidget"));
-        tableWidget->horizontalHeader()->setStretchLastSection(true);
+        listsTable->setHorizontalHeaderItem(3, __qtablewidgetitem3);
+        listsTable->setObjectName(QStringLiteral("listsTable"));
+        listsTable->horizontalHeader()->setStretchLastSection(true);
 
-        gridLayout_8->addWidget(tableWidget, 0, 0, 1, 1);
+        gridLayout_8->addWidget(listsTable, 0, 0, 1, 1);
 
         groupBox = new QGroupBox(listsTab);
         groupBox->setObjectName(QStringLiteral("groupBox"));
@@ -696,15 +696,15 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        comboBox_2 = new QComboBox(domainsTab);
-        comboBox_2->setObjectName(QStringLiteral("comboBox_2"));
+        domainListFilter = new QComboBox(domainsTab);
+        domainListFilter->setObjectName(QStringLiteral("domainListFilter"));
 
-        verticalLayout->addWidget(comboBox_2);
+        verticalLayout->addWidget(domainListFilter);
 
-        listWidget = new QListWidget(domainsTab);
-        listWidget->setObjectName(QStringLiteral("listWidget"));
+        blockedDomains = new QListWidget(domainsTab);
+        blockedDomains->setObjectName(QStringLiteral("blockedDomains"));
 
-        verticalLayout->addWidget(listWidget);
+        verticalLayout->addWidget(blockedDomains);
 
 
         verticalLayout_2->addLayout(verticalLayout);
@@ -739,13 +739,13 @@ public:
         gridLayout_4->setSpacing(6);
         gridLayout_4->setContentsMargins(11, 11, 11, 11);
         gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
-        verticalLayout_8 = new QVBoxLayout();
-        verticalLayout_8->setSpacing(6);
-        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
-        listView = new QListView(tab);
-        listView->setObjectName(QStringLiteral("listView"));
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setObjectName(QStringLiteral("verticalLayout_6"));
+        whitelistedDomains = new QListWidget(tab);
+        whitelistedDomains->setObjectName(QStringLiteral("whitelistedDomains"));
 
-        verticalLayout_8->addWidget(listView);
+        verticalLayout_6->addWidget(whitelistedDomains);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
@@ -765,10 +765,10 @@ public:
         horizontalLayout_2->addWidget(pushButton_5);
 
 
-        verticalLayout_8->addLayout(horizontalLayout_2);
+        verticalLayout_6->addLayout(horizontalLayout_2);
 
 
-        gridLayout_4->addLayout(verticalLayout_8, 0, 0, 1, 1);
+        gridLayout_4->addLayout(verticalLayout_6, 0, 0, 1, 1);
 
         tabWidget->addTab(tab, QString());
 
@@ -806,7 +806,7 @@ public:
         QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
         QObject::connect(disableServicePassword, SIGNAL(toggled(bool)), servicePassword, SLOT(setDisabled(bool)));
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(4);
         toolBox->setCurrentIndex(1);
 
 
@@ -866,21 +866,21 @@ public:
         saveServicePassword->setText(QApplication::translate("MainWindow", "Save password", 0));
         toolBox->setItemText(toolBox->indexOf(serviceToolbox), QApplication::translate("MainWindow", "Service", 0));
         tabWidget->setTabText(tabWidget->indexOf(settingsTab), QApplication::translate("MainWindow", "Settings", 0));
-        QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
+        QTableWidgetItem *___qtablewidgetitem = listsTable->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Name", 0));
-        QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);
+        QTableWidgetItem *___qtablewidgetitem1 = listsTable->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "URL", 0));
-        QTableWidgetItem *___qtablewidgetitem2 = tableWidget->horizontalHeaderItem(2);
+        QTableWidgetItem *___qtablewidgetitem2 = listsTable->horizontalHeaderItem(2);
         ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Active", 0));
-        QTableWidgetItem *___qtablewidgetitem3 = tableWidget->horizontalHeaderItem(3);
+        QTableWidgetItem *___qtablewidgetitem3 = listsTable->horizontalHeaderItem(3);
         ___qtablewidgetitem3->setText(QApplication::translate("MainWindow", "Description", 0));
         groupBox->setTitle(QApplication::translate("MainWindow", "Add list", 0));
         label_15->setText(QApplication::translate("MainWindow", "Name", 0));
         label_16->setText(QApplication::translate("MainWindow", "URL", 0));
         pushButton->setText(QApplication::translate("MainWindow", "Add", 0));
         tabWidget->setTabText(tabWidget->indexOf(listsTab), QApplication::translate("MainWindow", "Lists", 0));
-        comboBox_2->clear();
-        comboBox_2->insertItems(0, QStringList()
+        domainListFilter->clear();
+        domainListFilter->insertItems(0, QStringList()
          << QApplication::translate("MainWindow", "All lists", 0)
         );
         pushButton_2->setText(QApplication::translate("MainWindow", "Remove", 0));

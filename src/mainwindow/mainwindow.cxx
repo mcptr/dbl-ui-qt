@@ -1,7 +1,6 @@
 #include "mainwindow.hxx"
 #include "ui_mainwindow.h"
 #include "runtime.hxx"
-#include "constants.hxx"
 
 #include <dbl/util/crypto.hxx>
 
@@ -31,14 +30,42 @@ MainWindow::MainWindow(QWidget *parent) :
 	worker_thread_ = new QThread();
 	worker_->moveToThread(worker_thread_);
 
+	connect(this, SIGNAL(ui_initialized(const QString&, int)), worker_,	SLOT(create_connection(const QString&, int)));
+	connect(this, SIGNAL(control_restart()), worker_, SLOT(restart_service()));
 	connect(worker_, SIGNAL(log(const QString&)), this, SLOT(appendLog(const QString&)));
-	connect(worker_, SIGNAL(connection_status(bool)), this, SLOT(on_connection_status(bool)));
+	connect(
+		worker_, SIGNAL(connection_status(dblui::ConnectionStatus)),
+		this, SLOT(handle_connection_status(dblui::ConnectionStatus))
+	);
 
 	connect(
-		this,
-		SIGNAL(ui_initialized(const QString&, int)),
-		worker_,
-		SLOT(create_connection(const QString&, int))
+		worker_, SIGNAL(load_lists(dblui::OperationStatus)),
+		this, SLOT(handle_load_lists(dblui::OperationStatus))
+	);
+
+	connect(
+		worker_, SIGNAL(load_lists(const dblclient::types::DomainListsSet_t&)),
+		this, SLOT(handle_load_lists(const dblclient::types::DomainListsSet_t&))
+	);
+
+	connect(
+		worker_, SIGNAL(load_blocked_domains(dblui::OperationStatus)),
+		this, SLOT(handle_load_blocked_domains(dblui::OperationStatus))
+	);
+
+	connect(
+		worker_, SIGNAL(load_blocked_domains(const dblclient::types::DomainSet_t&)),
+		this, SLOT(handle_load_blocked_domains(const dblclient::types::DomainSet_t&))
+	);
+
+	connect(
+		worker_, SIGNAL(load_whitelisted_domains(dblui::OperationStatus)),
+		this, SLOT(handle_load_whitelisted_domains(dblui::OperationStatus))
+	);
+
+	connect(
+		worker_, SIGNAL(load_whitelisted_domains(const dblclient::types::DomainSet_t&)),
+		this, SLOT(handle_load_whitelisted_domains(const dblclient::types::DomainSet_t&))
 	);
 
 	worker_thread_->start();
@@ -263,16 +290,9 @@ void MainWindow::on_applyAllButton_released()
 void MainWindow::on_controlRestartButton_released()
 {
 	ui_->controlRestartButton->setEnabled(0);
-	//emit 
-	// try {
-	// 	statusBar()->showMessage("Restarting service");
-	// 	//client_->session().send_reload();
-	// 	start_session();
-	// }
-	// catch(const dblclient::DBLClientError& e) {
-	// 	statusBar()->showMessage("Failed to restart");
-	// }
-	ui_->controlRestartButton->setEnabled(1);
+	appendLog("Restarting service");
+	statusBar()->showMessage("Restarting service");
+	emit control_restart();
 }
 
 void MainWindow::appendLog(const QString& msg)
@@ -280,7 +300,113 @@ void MainWindow::appendLog(const QString& msg)
 	ui_->actionLog->appendPlainText(msg);
 }
 
-void MainWindow::on_connection_status(bool ok)
+void MainWindow::handle_connection_status(dblui::ConnectionStatus value)
 {
-	statusBar()->showMessage((ok ? "Connected" : "Connection failed"));
+	ui_->actionLog->clear();
+	QString txt_status;
+	bool enabled = false;
+
+	switch(value) {
+	case dblui::ConnectionStatus::FAILED:
+		txt_status = "Connection failed";
+		break;
+	case dblui::ConnectionStatus::CONNECTED:
+		txt_status = "Connected";
+		enabled = true;
+		break;
+	case dblui::ConnectionStatus::CONNECTING:
+		txt_status = "Connecting";
+		break;
+	case dblui::ConnectionStatus::DISCONNECTED:
+		txt_status = "Disconnected";
+		break;
+	}
+
+	appendLog(txt_status);
+	statusBar()->showMessage(txt_status);
+
+	ui_->controlRestartButton->setEnabled(enabled);
+}
+
+void MainWindow::handle_load_lists(dblui::OperationStatus value)
+{
+	ui_->listsTable->setRowCount(0);
+	ui_->listsTable->setEnabled(0);
+
+	switch(value) {
+	case dblui::OperationStatus::OP_IN_PROGRESS:
+		break;
+	case dblui::OperationStatus::OP_SUCCESS:
+	case dblui::OperationStatus::OP_FAILED:
+		ui_->listsTable->setEnabled(1);
+		break;
+	}
+}
+
+void MainWindow::handle_load_lists(const dblclient::types::DomainListsSet_t& lst)
+{
+	for(auto const& dl : lst) {
+		std::size_t n = ui_->listsTable->rowCount();
+		ui_->listsTable->insertRow(ui_->listsTable->rowCount());
+
+		QTableWidgetItem* name = new QTableWidgetItem(QString::fromStdString(dl.name));
+		QTableWidgetItem* url = new QTableWidgetItem(QString::fromStdString(dl.url));
+		QTableWidgetItem* active = new QTableWidgetItem(QString::number(dl.active));
+		QTableWidgetItem* description = new QTableWidgetItem(
+			dl.description.is_initialized() ? QString::fromStdString(dl.description.get()) : ""
+		);
+		ui_->listsTable->setItem(n, 0, name);
+		ui_->listsTable->setItem(n, 1, url);
+		ui_->listsTable->setItem(n, 2, active);
+		ui_->listsTable->setItem(n, 3, description);
+
+		ui_->domainListFilter->addItem(QString::fromStdString(dl.name));
+	}
+}
+
+void MainWindow::handle_load_blocked_domains(dblui::OperationStatus value)
+{
+	ui_->blockedDomains->setEnabled(0);
+
+	switch(value) {
+	case dblui::OperationStatus::OP_IN_PROGRESS:
+		break;
+	case dblui::OperationStatus::OP_SUCCESS:
+	case dblui::OperationStatus::OP_FAILED:
+		ui_->blockedDomains->setEnabled(1);
+		break;
+	}
+}
+
+void MainWindow::handle_load_blocked_domains(const dblclient::types::DomainSet_t& lst)
+{
+	ui_->blockedDomains->clear();
+	for(auto const& d : lst) {
+		qDebug() << QString::fromStdString(d.name);
+		ui_->blockedDomains->addItem(QString::fromStdString(d.name));
+	}
+}
+
+void MainWindow::handle_load_whitelisted_domains(dblui::OperationStatus value)
+{
+	ui_->blockedDomains->setEnabled(0);
+
+	switch(value) {
+	case dblui::OperationStatus::OP_IN_PROGRESS:
+		break;
+	case dblui::OperationStatus::OP_SUCCESS:
+	case dblui::OperationStatus::OP_FAILED:
+		ui_->blockedDomains->setEnabled(1);
+		break;
+	}
+}
+
+void MainWindow::handle_load_whitelisted_domains(const dblclient::types::DomainSet_t& lst)
+{
+	qDebug() << "WHITELISTED";
+	ui_->whitelistedDomains->clear();
+	for(auto const& d : lst) {
+		qDebug() << QString::fromStdString(d.name);
+		ui_->whitelistedDomains->addItem(QString::fromStdString(d.name));
+	}
 }

@@ -2,6 +2,7 @@
 #define DBLUI_CONSTANTS_HXX
 
 #include <string>
+#include <QtCore>
 
 namespace dblui {
 
@@ -31,10 +32,14 @@ const QString CFG_HTTP_RESPONDER_ENABLE = "enabled";
 const QString CFG_HTTP_RESPONDER_STATUS_CODE = "statusCode";
 const QString CFG_HTTP_RESPONDER_STATUS_TEXT = "statusText";
 
-
-
 const QString DEFAULT_SERVICE_ADDRESS = "127.0.0.1";
 const int DEFAULT_SERVICE_PORT = 7654;
+
+enum ConnectionStatus { FAILED, DISCONNECTED, CONNECTED, CONNECTING };
+
+enum OperationStatus { OP_IN_PROGRESS, OP_FAILED, OP_SUCCESS };
+
+
 } // dblui
 
 #endif
