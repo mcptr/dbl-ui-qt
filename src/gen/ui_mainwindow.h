@@ -388,7 +388,6 @@ public:
         line_2->raise();
         line_4->raise();
         actionLog->raise();
-        versionLabel->raise();
 
         verticalLayout_3->addWidget(widget);
 
@@ -806,7 +805,7 @@ public:
         QObject::connect(exitButton, SIGNAL(released()), MainWindow, SLOT(close()));
         QObject::connect(disableServicePassword, SIGNAL(toggled(bool)), servicePassword, SLOT(setDisabled(bool)));
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(3);
         toolBox->setCurrentIndex(1);
 
 

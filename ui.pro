@@ -29,6 +29,7 @@ INCLUDEPATH     += . src src/mainwindow \
 
 # Input
 HEADERS         += src/gen/ui_mainwindow.h
+                #src/mainwindow/mainwindow.hxx
 FORMS           += src/ui/mainwindow.ui
 SOURCES         += src/main.cxx \
                     src/client/worker.cxx \

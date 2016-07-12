@@ -27,6 +27,8 @@ signals:
 private slots:
 	void on_applyAllButton_released();
 	void on_controlRestartButton_released();
+	void on_domainListFilter_currentIndexChanged(const QString &arg1);
+
 
 	void appendLog(const QString& msg);
 

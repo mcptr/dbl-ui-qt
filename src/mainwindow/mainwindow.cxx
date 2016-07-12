@@ -345,6 +345,12 @@ void MainWindow::handle_load_lists(dblui::OperationStatus value)
 
 void MainWindow::handle_load_lists(const dblclient::types::DomainListsSet_t& lst)
 {
+	ui_->listsTable->clear();
+	ui_->domainListFilter->clear();
+
+	//ui_->domainListFilter->addItem("-- Choose list ---");
+	ui_->domainListFilter->addItem("ALL");
+
 	for(auto const& dl : lst) {
 		std::size_t n = ui_->listsTable->rowCount();
 		ui_->listsTable->insertRow(ui_->listsTable->rowCount());
@@ -409,4 +415,9 @@ void MainWindow::handle_load_whitelisted_domains(const dblclient::types::DomainS
 		qDebug() << QString::fromStdString(d.name);
 		ui_->whitelistedDomains->addItem(QString::fromStdString(d.name));
 	}
+}
+
+void MainWindow::on_domainListFilter_currentIndexChanged(const QString &arg1)
+{
+	qDebug() << "domains filter: " << arg1;
 }
